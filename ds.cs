@@ -7,26 +7,32 @@ using System.Threading.Tasks;
 
 namespace ds
 {
-	public static class RailFenceCipher
+	public static class Cipher
 	{
 		public static void Main(string[] args)
 		{
-			if (args[0].Equals("encrypt"))
+			if (args[0].Equals("rail-fence")){
+			if (args[1].Equals("encrypt"))
 			{
-				string text = args[1];
-				string result = Encrypt(text, int.Parse(args[2]));
+				string text = args[2];
+				string result = Encrypt(text, int.Parse(args[3]));
 
 				Console.WriteLine(result);
 				Console.ReadKey();
 			}
-			else if (args[0].Equals("decrypt"))
+			else if (args[1].Equals("decrypt"))
 			{
-				string text = args[1];
-				string result = Decrypt(text, int.Parse(args[2]));
+				string text = args[2];
+				string result = Decrypt(text, int.Parse(args[3]));
 
 				Console.WriteLine(result);
 				Console.ReadKey();
 			}
+			}
+			//else if(args[0].Equals("..."))
+			//{
+			
+			//}
 		}
 
 
