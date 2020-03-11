@@ -17,7 +17,9 @@ Rail-fence cipher është shumë i lehtë për tu zbuluar. Celësi i saj është
 P.sh. për plaintext-in defend the east wall of the castle, për celësin 3, kemi:
 
 d . . . n . . . e . . . t . . . l . . . h . . . s . . .
+
 . e . e . d . h . e . s . w . l . o . t . e . a . t . e
+
 . . f . . . t . . . a . . . a . . . f . . . c . . . l .
 
 ,ku ciphertext-i është dnetlhseedheswloteateftaafcl, ku hapësirat nuk i kemi përfshirë në enkriptim.
@@ -46,6 +48,7 @@ Microsoft Windows [Version 10.0.18362.535]
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence encrypt 3 "takohemi neser"
 thnraoeieekms
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence encrypt 5 "departamenti i kompjuterikes"
+
 depeemnmjkspatouiatiktrrie
 
 Nënkomanda decrypt
