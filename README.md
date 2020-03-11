@@ -18,9 +18,9 @@ P.sh. për plaintext-in defend the east wall of the castle, për celësin 3, kem
 
 d . . . n . . . e . . . t . . . l . . . h . . . s . . .
 
-. e . e . d . h . e . s . w . l . o . t . e . a . t . e
+. e . .e . d . h . e . s . w . l . o . t . e . a . t . e
 
-. . f . . . t . . . a . . . a . . . f . . . c . . . l .
+. . f . . . .t . . . .a . . . a . . . f . . . c . . . l .
 
 ,ku ciphertext-i është dnetlhseedheswloteateftaafcl, ku hapësirat nuk i kemi përfshirë në enkriptim.
 
@@ -46,14 +46,15 @@ Microsoft Windows [Version 10.0.18362.535]
 (c) 2019 Microsoft Corporation. All rights reserved.
 
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence encrypt 3 "takohemi neser"
+
 thnraoeieekms
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence encrypt 5 "departamenti i kompjuterikes"
-
 depeemnmjkspatouiatiktrrie
 
 Nënkomanda decrypt
 
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence decrypt 3 "thnraoeieekms"
+
 takohemineser
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence decrypt 5 "depeemnmjkspatouiatiktrrie"
 departamentiikompjuterikes
