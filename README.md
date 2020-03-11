@@ -13,16 +13,9 @@ Ekzekutimi i programit bëhet prej Command Prompt duke i dhënë vlerat e argume
 Komanda rail-fence
 
 Për këtë komandë jemi bazuar në disa linqe me tutoriale të ndryshëm një ndër to edhe http://practicalcryptography.com/ciphers/rail-fence-cipher/ .
-Rail-fence cipher është shumë i lehtë për tu zbuluar. Celësi i saj është numri i shiritave (rails). Ajo punon në këtë parim:"shkruaj shkronjat përgjatë kolonave, lexo përgjatë rreshtave". Kodin për këtë komandë e kemi shkruar duke u bazuar në këtë model që kemi hasur në shumicën e literaturave:
-P.sh. për plaintext-in defend the east wall of the castle, për celësin 3, kemi:
+Rail-fence cipher është shumë i lehtë për tu zbuluar. Celësi i saj është numri i shiritave (rails). Ajo punon në këtë parim:"shkruaj shkronjat përgjatë kolonave, lexo përgjatë rreshtave". Kodin për këtë komandë e kemi shkruar duke u bazuar në modelin që kemi hasur në  këtë link dhe shumicën e literaturave.
 
-d . . . n . . . e . . . t . . . l . . . h . . . s . . .
-
-. e . .e . d . h . e . s . w . l . o . t . e . a . t . e
-
-. . f . . . .t . . . .a . . . a . . . f . . . c . . . l .
-
-,ku ciphertext-i është dnetlhseedheswloteateftaafcl, ku hapësirat nuk i kemi përfshirë në enkriptim.
+P.sh. për plaintext-in defend the east wall of the castle, për celësin 3, kemi ciphertext-in dnetlhseedheswloteateftaafcl, ku hapësirat nuk i kemi përfshirë në enkriptim.
 
 Nënkomanda encrypt
 
@@ -48,6 +41,7 @@ Microsoft Windows [Version 10.0.18362.535]
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence encrypt 3 "takohemi neser"
 
 thnraoeieekms
+
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence encrypt 5 "departamenti i kompjuterikes"
 depeemnmjkspatouiatiktrrie
 
@@ -56,5 +50,6 @@ Nënkomanda decrypt
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence decrypt 3 "thnraoeieekms"
 
 takohemineser
+
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence decrypt 5 "depeemnmjkspatouiatiktrrie"
 departamentiikompjuterikes
