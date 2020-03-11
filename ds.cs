@@ -14,16 +14,16 @@ namespace ds
 			if (args[0].Equals("rail-fence")){
 			if (args[1].Equals("encrypt"))
 			{
-				string text = args[2];
-				string result = Encrypt(text, int.Parse(args[3]));
+				string plaintext = args[3];
+				string result = Encrypt(plaintext, int.Parse(args[2]));
 
 				Console.WriteLine(result);
 				Console.ReadKey();
 			}
 			else if (args[1].Equals("decrypt"))
 			{
-				string text = args[2];
-				string result = Decrypt(text, int.Parse(args[3]));
+				string plaintext = args[3];
+				string result = Decrypt(plaintext, int.Parse(args[2]));
 
 				Console.WriteLine(result);
 				Console.ReadKey();
@@ -36,11 +36,11 @@ namespace ds
 		}
 
 
-		public static string Encrypt(string text, int rails)
+		public static string Encrypt(string plaintext, int rails)
 		{
 
-			text = text.ToUpper();
-			text = Regex.Replace(text, @"[^A-Z0-9]", string.Empty);
+			plaintext = plaintext.ToUpper();
+			plaintext = Regex.Replace(plaintext, @"[^A-Z0-9]", string.Empty);
 
 			var lines = new List<StringBuilder>();
 
@@ -50,9 +50,9 @@ namespace ds
 			int currentLine = 0;
 			int direction = 1;
 
-			for (int i = 0; i < text.Length; i++)
+			for (int i = 0; i < plaintext.Length; i++)
 			{
-				lines[currentLine].Append(text[i]);
+				lines[currentLine].Append(plaintext[i]);
 
 				if (currentLine == 0)
 					direction = 1;
@@ -70,10 +70,10 @@ namespace ds
 			return result.ToString();
 		}
 
-		public static string Decrypt(string text, int rails)
+		public static string Decrypt(string plaintext, int rails)
 		{
-			text = text.ToUpper();
-			text = Regex.Replace(text, @"[^A-Z0-9]", string.Empty);
+			plaintext = plaintext.ToUpper();
+			plaintext = Regex.Replace(plaintext, @"[^A-Z0-9]", string.Empty);
 
 			var lines = new List<StringBuilder>();
 
@@ -85,7 +85,7 @@ namespace ds
 			int currentLine = 0;
 			int direction = 1;
 
-			for (int i = 0; i < text.Length; i++)
+			for (int i = 0; i < plaintext.Length; i++)
 			{
 				linesLenght[currentLine]++;
 
@@ -103,7 +103,7 @@ namespace ds
 			{
 				for (int c = 0; c < linesLenght[line]; c++)
 				{
-					lines[line].Append(text[currentChar]);
+					lines[line].Append(plaintext[currentChar]);
 					currentChar++;
 				}
 			}
@@ -115,7 +115,7 @@ namespace ds
 
 			int[] currentReadLine = Enumerable.Repeat(0, rails).ToArray();
 
-			for (int i = 0; i < text.Length; i++)
+			for (int i = 0; i < plaintext.Length; i++)
 			{
 
 				result.Append(lines[currentLine][currentReadLine[currentLine]]);
