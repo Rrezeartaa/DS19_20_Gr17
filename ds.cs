@@ -11,20 +11,35 @@ namespace ds
     {
         public static void Main(string[] args)
         {
-            if (args[0].Equals("rail-fence"))
+            railfence railfence=new railfence();
+            
+            if (args.Length < 3 )
             {
-                if (args[1].Equals("encrypt"))
+                throw new IndexOutOfRangeException("\n\tNuk ka argumente te mjaftueshme!" +
+                                                        "\n\tFunksionet e ketij programi pranojne 4 ose 5 argumente!");
+               
+            }
+            if (args.Length > 4)
+            {
+                throw new IndexOutOfRangeException("\nNumri i argumenteve eshte i tepert!");
+                
+            }
+
+            
+            if ("rail-fence".Equals(args[0]))
+            {
+                if ("encrypt".Equals(args[1]))
                 {
                     string plaintext = args[3];
-                    string result = Encrypt(plaintext, int.Parse(args[2]));
+                    string result =railfence.Encrypt(plaintext, int.Parse(args[2]));
 
                     Console.WriteLine(result);
                     Console.ReadKey();
                 }
-                else if (args[1].Equals("decrypt"))
+                else if ("decrypt".Equals(args[1]))
                 {
                     string plaintext = args[3];
-                    string result = Decrypt(plaintext, int.Parse(args[2]));
+                    string result =railfence.Decrypt(plaintext, int.Parse(args[2]));
 
                     Console.WriteLine(result);
                     Console.ReadKey();
@@ -36,117 +51,7 @@ namespace ds
         }
 
 
-        public static string Encrypt(string plaintext, int rails)
-        {
-            char[] plain = plaintext.ToCharArray();              
-            char[,] cipher = new char[rails,plain.Length];  
-            for (int i = 0; i < rails; i++)
-                for (int j = 0; j < plain.Length; j++)
-                    cipher[i,j] = '#';
-
-            int level = 0;
-            int flag = 0;
-
-            for (int i = 0; i < plain.Length; i++)
-            {
-                cipher[level,i] = plain[i];
-
-                if (flag == 0)
-                {
-                    level++;
-
-                    if (level == rails - 1)
-                        flag = 1;
-                }
-                else
-                {
-                    level--;
-
-                    if (level == 0)
-                        flag = 0;
-                }
-            }
-
-            String cipher_text = "";
-            for (int i = 0; i < rails; i++)
-            {
-                for (int j = 0; j < plain.Length; j++)
-                {
-                    if (cipher[i,j] != '#')
-                        cipher_text += cipher[i,j];
-                }
-            }
-            return cipher_text;
-        }
-
-
-        public static String Decrypt(string plaintext, int rails)
-        {
-
-            char[] plain = plaintext.ToCharArray();               
-            char[,] cipher = new char[rails,plain.Length];  
-            for (int i = 0; i < rails; i++)
-                for (int j = 0; j < plain.Length; j++)
-                    cipher[i,j] = '#';
-
-            int level = 0;
-            int flag = 0;
-            int index = 0;
-
-            for (int i = 0; i < plain.Length; i++)
-            {
-                cipher[level,i] = '*';
-                if (flag == 0)
-                {
-                    level++;
-
-                    
-                    if (level == rails - 1)
-                        flag = 1;
-                }
-                else
-                {
-                    level--;
-
-                    if (level == 0)
-                        flag = 0;
-                }
-            }
-
-            
-            for (int i = 0; i < rails; i++)
-            {
-                for (int j = 0; j < plain.Length; j++)
-                {
-                    if (cipher[i,j] == '*')
-                    {
-                        cipher[i,j] = plain[index];
-                        index++;
-                    }
-                }
-            }
-
-            String cipher_text = "";
-            level = 0;
-            flag = 0;
-            for (int i = 0; i < plain.Length; i++)
-            {
-                if (flag == 0)
-                {
-                    level++;
-                    if (level == rails - 1)
-                        flag = 1;
-                }
-                else
-                {
-                    level--;
-                    if (level == 0)
-                        flag = 0;
-                }
-            }
-            return cipher_text;
-
-        }
+       
 
     }
 }
