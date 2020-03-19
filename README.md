@@ -38,6 +38,7 @@ C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence encrypt 3 "takohemi ne
 th eaoeinsrkme
 
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence encrypt 5 "departamenti i kompjuterikes"
+
 deoiemnkmrkpat peeatiijtsr u
 
 Nënkomanda decrypt
