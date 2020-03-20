@@ -110,6 +110,8 @@ namespace ds
 
             for (int i = 0; i < plain.Length; i++)
             {
+                if (cipher[level,i] != '#')
+                cipher_text += cipher[level,i];
                 if (flag == 0)
                 {
                     level++;
