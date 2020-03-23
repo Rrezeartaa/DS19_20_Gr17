@@ -4,17 +4,7 @@ using System.Linq;
 
 public class Numerical
 {
-	static void Main(string[] args)
-	{
-		
-		string input = "takohemi neser";
-		string encodedString = Encode(input);
-		Console.WriteLine("Teksti i enkoduar:" + encodedString);
-
-
-		Console.ReadLine();
-
-	}
+	
 	public static string Encode(string input)
 	{
 
@@ -39,7 +29,7 @@ public class Numerical
 
 		return result.Trim();
 	}
-}
+
 
 
 /*public static string Encode(string input)
@@ -49,3 +39,4 @@ public class Numerical
 				.Replace(input, "")
 				.Select(s => ((int)s % 32).ToString()));
 }*/
+}
