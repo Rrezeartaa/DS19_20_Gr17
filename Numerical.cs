@@ -2,7 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 using System.Linq;
 
-public class Program
+public class Numerical
 {
 	static void Main(string[] args)
 	{
