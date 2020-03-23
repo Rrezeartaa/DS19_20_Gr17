@@ -12,6 +12,7 @@ namespace ConsoleApp12
         {
             string str;
             int i, wrd, l;
+            //numerimi i fjalive 
 
             Console.Write("\n\nJepe nje fjali :\n");
             Console.Write("------------------------------------------------------\n");
