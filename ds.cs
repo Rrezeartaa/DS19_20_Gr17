@@ -44,6 +44,14 @@ namespace ds
                     Console.WriteLine(result);
                     Console.ReadKey();
                 }
+                else if("numerical".Equals(args[0])){
+                    if("encode".Equals(args[1]))
+                    {
+                        string input=args[2];
+                        string result=Numerical.Encode(input);
+                        Console.WriteLine(result);
+                        Console.ReadKey();
+                    }
 
                 
             }
