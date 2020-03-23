@@ -44,6 +44,14 @@ namespace ds
                     Console.WriteLine(result);
                     Console.ReadKey();
                 }
+                else
+                {
+                    Console.WriteLine("\nArgumente jovalide! \nSiguroheni qe keni shkruar argumentet si ne vijim:  \n" +
+                            "ds rail-fence encrypt <rails> <text>: per enkriptimin e plaintext-it\n" +
+                            "ds rail-fence decrypt <rails> <text>: per dekriptimin e ciphertext-it\n");
+
+                }
+            }
                 else if("numerical".Equals(args[0])){
                     if("encode".Equals(args[1]))
                     {
