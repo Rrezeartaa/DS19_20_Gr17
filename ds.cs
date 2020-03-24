@@ -30,25 +30,45 @@ namespace ds
             {
                 if ("encrypt".Equals(args[1]))
                 {
-                    string plaintext = args[3];
-                    string result =railfence.Encrypt(plaintext, int.Parse(args[2]));
-
-                    Console.WriteLine(result);
-                    Console.ReadKey();
+                     if ("show".Equals(args[2]))
+                    {
+                        string plaintext = args[4];
+                        string result = Railfence.encrypt(plaintext, int.Parse(args[3]));
+                        Console.WriteLine(result); 
+                        Railfence.show(plaintext, int.Parse(args[3]));Console.ReadKey();
+                    }
+                    else
+                    {
+                        string plaintext = args[3];
+                        string result = Railfence.encrypt(plaintext, int.Parse(args[2]));
+                        Console.WriteLine(result);
+                        Console.ReadKey();
+                    }
                 }
                 else if ("decrypt".Equals(args[1]))
                 {
-                    string plaintext = args[3];
-                    string result =railfence.Decrypt(plaintext, int.Parse(args[2]));
-
-                    Console.WriteLine(result);
-                    Console.ReadKey();
+                   if ("show".Equals(args[2]))
+                    {
+                        string ciphertext = args[4];
+                        string result = Railfence.decrypt(ciphertext, int.Parse(args[3]));
+                        Console.WriteLine(result); Console.ReadKey();
+                        Railfence.show(ciphertext, int.Parse(args[3]));
+                    }
+                    else
+                    {
+                        string ciphertext = args[3];
+                        string result = Railfence.decrypt(ciphertext, int.Parse(args[2]));
+                        Console.WriteLine(result);
+                        Console.ReadKey();
+                    }
                 }
                 else
                 {
                     Console.WriteLine("\nArgumente jovalide! \nSiguroheni qe keni shkruar argumentet si ne vijim:  \n" +
                             "ds rail-fence encrypt <rails> <text>: per enkriptimin e plaintext-it\n" +
-                            "ds rail-fence decrypt <rails> <text>: per dekriptimin e ciphertext-it\n");
+                            "ds rail-fence decrypt <rails> <text>: per dekriptimin e ciphertext-it\n"+
+                            "ds rail-fence encrypt show <rails> <text>: per te pare tekstin e enkriptuar te organizuar ne shirita\n" +
+                            "ds rail-fence decrypt show <rails> <text>: per te pare tekstin e dekriptuar te organizuar ne shirita\n");
 
                 }
             }
