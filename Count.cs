@@ -1,68 +1,44 @@
 using System;
 using System.Collections.Generic;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace ConsoleApp12
+using System.Text.RegularExpressions;
+namespace ds
 {
-    class Program
+    class count
     {
-        public static void Main()
+        public static int countlines(String text)
         {
-            string str1;
+            int lines = 1;
+            int start = 0;
             
-            int j, fja, e ;
-            string str;
-            int i, wrd, l;
-
-            Console.Write("\n\nShkruaj fjal apo fjali :\n");
-            Console.Write("------------------------------------------------------\n");
-            Console.Write("Input the string : ");
-            str = Console.ReadLine();
-
-            l = 0;
-            wrd = 0;
-
-          
-            while (l <= str.Length - 1)
+            while ((start = text.IndexOf('\n', start)) != -1)
             {
-               
-                if (str[l] == ' ' || str[l] == '\n' || str[l] == '\t')
+                lines++;
+                start++;
+            }
+            
+            return lines;
+  
+        }
+
+        
+        public static int countwords(String text)
+        {
+            int l = 0;
+            int word = 1;
+
+            while (l <= text.Length - 1)
+            {
+                if (text[l] == ' ' || text[l] == '\n' || text[l] == '\t')
                 {
-                    wrd++;
+                    word++;
                 }
-                
+
                 l++;
             }
-            
-            e = 0;
-            fja = 1;
-
-            while (e <= str.Length - 1)
-            {
-
-                if (str[e] == '.' || str[e] == '\n' || str[e] == '\t')
-                {
-                    fja++;
-                }
-
-                e++;
-            }
-
-
-
-
-
-
-
-
-
-
-            Console.Write("Numri i fjalive te dhena : {0}\n", wrd);
-            Console.Write("Numri i fjalive te dhena : {0}\n", fja);
+            return word;
         }
     }
 }
