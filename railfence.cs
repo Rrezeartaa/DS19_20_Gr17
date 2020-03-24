@@ -129,8 +129,49 @@ namespace ds
 
         }
 
+public static void show(string plaintext, int rails)
+    {
 
+        if (rails == 1)
+        {
+            
+            Console.Write(plaintext);
+            return;
+        }
+ 
+        int len = plaintext.Length;
+
+        char[,] a = new char[len, len];
+        char[] c = plaintext.ToCharArray();
+
+        int row = 0;
+        bool down = true;
+
+        for (int i = 0; i < len; i++)
+        {
+            a[row, i] = c[i];
+
+            if (row == rails - 1)
+                down = false;
+            else if (row == 0)
+                down = true;
+
+            if (down)
+                row++;
+            else
+                row--;
+        }
+
+        for (int i = 0; i < rails; i++)
+        {
+            for (int j = 0; j < len; j++)
+            {
+                Console.Write(a[i, j] + " ");
+            }
+            Console.Write("\n");
+        }
+    }
 
         
-    }
+    
 }
