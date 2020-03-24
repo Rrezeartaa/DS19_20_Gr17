@@ -1,143 +1,46 @@
-using System;
-using System.Text.RegularExpressions;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
-
-public class Numerical
+namespace ds
 {
+    class Numerical
+    {
+        public static string Encode(string input)
+        {
 
+            string result = "";
 
+            Regex rgx = new Regex("[^A-Za-z]");
+            string s = rgx.Replace(input, "").ToString();
 
-	static int MAX = 1000;
-	static char[] replaceSpaces(char[] str)
-	{
+            int index = 0;
 
+            for (int i = 0; i < s.Length; i++)
+            {
 
-		int space_count = 0, i = 0;
-		for (i = 0; i < str.Length; i++)
-			if (str[i] == ' ')
-				space_count++;
+                index = (int)s[i] % 32;
 
+                if (index > 0 && index < 27)
+                {
+                    result += index + " ";
+                }
+            }
 
-		while (str[i - 1] == ' ')
-		{
-			space_count--;
-			i--;
-		}
+            return result.Trim();
+        }
+        public static void Decode(String ciphertext)
+        {
+            String[] nr = ciphertext.Split(' ');
+            foreach (String s in nr)
+            {
+                int a = int.Parse(s);
+                char c = (char)(a + 'a' - 1);
+                Console.Write(c);
+            }
+        }
+    }
 
-
-		int new_length = i + space_count * 2;
-
-
-		if (new_length > MAX)
-			return str;
-
-
-		int index = new_length - 1;
-
-		char[] new_str = str;
-		str = new char[new_length];
-
-
-		for (int j = i - 1; j >= 0; j--)
-		{
-
-
-			if (new_str[j] == ' ')
-			{
-				str[index] = '0';
-				str[index - 1] = '2';
-				str[index - 2] = '%';
-				index = index - 3;
-			}
-			else
-			{
-				str[index] = new_str[j];
-				index--;
-			}
-		}
-		return str;
-	}
-	
-
-
-	static void Main(string[] args)
-	{
-
-
-		
-
-
-		char[] str = "takohemi neser ".ToCharArray();
-
-		// Prints the replaced string 
-		str = replaceSpaces(str);
-
-		for (int i = 0; i < str.Length; i++)
-			Console.Write(str[i]);
-
-		Console.WriteLine("\n");
-
-		
-
-
-
-
-
-		string input = "takohemi neser";
-		string encodedString = Encode(input);
-		Console.WriteLine("Teksti i enkoduar:" + encodedString);
-
-		
-		Console.ReadLine();
-
-
-
-
-
-	}
-	
-
-
-	public static string Encode(string input)
-	{
-
-		string result = "";
-
-
-		Regex rgx = new Regex("[^A-Za-z]");
-		string s = rgx.Replace(input, "").ToString();
-
-		int index = 0;
-
-		for (int i = 0; i < s.Length; i++)
-		{
-
-			index = (int)s[i] % 32;
-
-			if (index > 0 && index < 27)
-			{
-				result += index + " ";
-			}
-		}
-
-		return result.Trim();
-	}
-	
-}
-
-		return result.Trim();
-	}
-
-
-
-/*public static string Encode(string input)
-{
-
-	return string.Join(" ", new Regex(@"[^A-Za-z]")
-				.Replace(input, "")
-				.Select(s => ((int)s % 32).ToString()));
-}*/
 }
