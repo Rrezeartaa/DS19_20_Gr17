@@ -22,8 +22,8 @@ Me anë të kësaj nënkomande bëhet dekriptimi i ciphertext-it në plaintext. 
 
 Komanda Numerical
 Përmes kësaj komande është mundësuar zevendësimi i secilës shkronjë me pozitën e tyre në alfabet dhe anasjelltas.
-Kemi arritur që shkronjën a të zevëndesojmë me numërin 1 b=2,c=3 etj duke u bazuar dhe merre informacione ne këto resurse burimore:
-*********
+Kemi arritur që shkronjën a të zevëndesojmë me numërin 1 b=2,c=3 etj duke u bazuar dhe merre informacione ne këtë resurse burimore:
+https://docs.microsoft.com/en-us/dotnet/standard/base-types/character-encoding
 Nenkomanda Encode
 
 Enkodon tekstin <text> në pozitat alfabetike të shkronjave.
