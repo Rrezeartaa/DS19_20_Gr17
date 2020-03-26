@@ -40,5 +40,20 @@ namespace ds
             }
             return word;
         }
+            public static int countletters(String text)
+        {
+            int nriShkronjave = 0;
+
+            text = text.ToLower();
+            for (int i = 0; i < text.Length; i++)
+            {
+                if ((text[i] >= 'a' && text[i] <= 'z'))
+                {
+                    nriShkronjave++;
+                }
+            }
+            return nriShkronjave;
+        }
+        }
     }
 }
