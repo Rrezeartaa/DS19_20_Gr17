@@ -24,8 +24,6 @@ Komanda Numerical
 Përmes kësaj komande është mundësuar zevendësimi i secilës shkronjë me pozitën e tyre në alfabet dhe anasjelltas.
 Kemi arritur që shkronjën a të zevëndesojmë me numërin 1 b=2,c=3 etj duke u bazuar dhe merre informacione ne këto resurse burimore:
 *********
-
-
 Nenkomanda Encode
 
 Enkodon tekstin <text> në pozitat alfabetike të shkronjave.
@@ -65,7 +63,11 @@ takohemi neser
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence decrypt 5 "deoiemnkmrkpat peeatiijtsr u"
 departamenti i kompjuterikes
 
-Nenkomanda Encode
-C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds numerical encode "takohemi neser"
+Nënkomanda Encode
+C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds numerical encode "takohemineser"
 
 20 1 11 15 8 5 13 9 14 5 19 5 18
+Nënkomanda decode 
+C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds numerical decode "20 1 11 15 8 5 13 9 14 5 19 5 18"
+
+takohemineser
