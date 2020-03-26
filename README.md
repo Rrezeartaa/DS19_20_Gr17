@@ -64,10 +64,16 @@ C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence decrypt 5 "deoiemnkmrk
 departamenti i kompjuterikes
 
 Nënkomanda Encode
+
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds numerical encode "takohemineser"
 
 20 1 11 15 8 5 13 9 14 5 19 5 18
+
+
 Nënkomanda decode 
+
+
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds numerical decode "20 1 11 15 8 5 13 9 14 5 19 5 18"
+
 
 takohemineser
