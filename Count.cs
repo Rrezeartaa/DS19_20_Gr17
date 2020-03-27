@@ -55,17 +55,7 @@ namespace ds
             return nriShkronjave;
         }
 
-        public static int countcharacters(String text)
-        {
-            int nrKaraktereve = 0;
-            for (int i = 0; i < text.Length; i++)
-            {
-                if (text[i] != ' ')
-                    nrKaraktereve++;
-            }
-
-            return nrKaraktereve;
-        }
+        
 
         public static int countsymbols(String text)
         {
