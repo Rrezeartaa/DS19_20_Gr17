@@ -24,7 +24,53 @@ namespace ds
             }
             
             
-            
+            else if ("count".Equals(args[0]))
+            {
+                if ("lines".Equals(args[1]))
+                {
+                    Console.WriteLine(count.countlines(args[2]));
+                }
+
+                else if ("words".Equals(args[1]))
+                {
+                    Console.WriteLine(count.countwords(args[2]));
+                }
+                else if ("letters".Equals(args[1]))
+                {
+                    Console.WriteLine(count.countletters(args[2]));
+                }
+                
+                else if ("symbols".Equals(args[1]))
+                {
+                    Console.WriteLine(count.countsymbols(args[2]));
+                }
+                else if ("vowels".Equals(args[1]))
+                {
+                    Console.WriteLine(count.countvowels(args[2]));
+                }
+                else if ("consonants".Equals(args[1]))
+                {
+                    Console.WriteLine(count.countconsonants(args[2]));
+                }
+                else if("sentences".Equals(args[1]))
+                {
+                    Console.WriteLine(count.countsent(args[2]));
+                }
+
+                else
+                {
+                    Console.WriteLine("\nArgumente jovalide! \nSiguroheni qe keni shkruar argumentet si ne vijim:  \n" +
+                            "ds count lines <text>: per te llogaritur numrin e rreshtave\n" +
+                            "ds count words <text>: per te llogaritur numrin e fjaleve\n" +
+                            "ds count letters <text>: per te llogaritur numrin e shkronjave\n" +
+                            "ds count symbols <text>: per te llogaritur numrin e simboleve\n" +
+                            "ds count vowels <text>: per te llogaritur numrin e zanoreve\n" +
+                            "ds count consonants <text>: per te llogaritur numrin e bashketingelloreve\n"+
+                            "ds count sentences <text>: per te llogaritur numrin e fjalive\n"
+                            );
+
+                }
+            }
             
             
             
