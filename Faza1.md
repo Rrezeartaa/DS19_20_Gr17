@@ -24,6 +24,7 @@ Nenkomanda Decode
 
 Dekodon vargun <code> nga shifrat në shkronjat përkatëse.
 
+
 Komanda rail-fence
 
 Për këtë komandë jemi bazuar në disa linqe me tutoriale të ndryshme: http://practicalcryptography.com/ciphers/rail-fence-cipher .
