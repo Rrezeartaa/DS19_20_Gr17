@@ -59,7 +59,7 @@ namespace ds
 
                 else
                 {
-                    Console.WriteLine("\nArgumente jovalide! \nSiguroheni qe keni shkruar argumentet si ne vijim:  \n" +
+                    Console.WriteLine("\nArgumentet jane jovalide! \nSigurohuni qe keni shkruar argumentet si ne vijim:  \n" +
                             "ds count lines <text>: per te llogaritur numrin e rreshtave\n" +
                             "ds count words <text>: per te llogaritur numrin e fjaleve\n" +
                             "ds count letters <text>: per te llogaritur numrin e shkronjave\n" +
@@ -71,35 +71,13 @@ namespace ds
 
                 }
             }
-            else if ("numerical".Equals(args[0])) {
+             else if ("numerical".Equals(args[0]))
+            {
                 if ("encode".Equals(args[1]))
-                {
-                  
-                    
-                        string input = args[2];
-                        string result = Numerical.Encode(input);
-                        Console.WriteLine(result);
-                        Console.ReadKey();
-                    
-                }
-                else if ("decode".Equals(args[1]))
-                {
-
-                   
-                        string input = args[2];
-
-                    Numerical.Decode(input);
-                        
-                        Console.ReadKey();
-                    
-                }
-
-            }
-            else if ("encode".Equals(args[1]))
                 {
                     if ("--separator".Equals(args[2]))
                     {
-                     
+
                         string result = Numerical.Encode(args[4]);
                         string resultt = Numerical.separator(args[3], args[4]);
                         Console.WriteLine(result);
@@ -111,17 +89,37 @@ namespace ds
 
                     else
                     {
-                        string input = args[2];
-                        string result = Numerical.Encode(input);
+                        string text = args[2];
+                        string result = Numerical.Encode(text);
                         Console.WriteLine(result);
                         Console.ReadKey();
                     }
-                    
+
                 }
-            
-            
-            
-            
+                else if ("decode".Equals(args[1]))
+                {
+
+
+                    string code = args[2];
+
+                    Numerical.Decode(code);
+
+                    Console.ReadKey();
+
+                }
+              else
+              {
+                Console.WriteLine("\nArgumentet jane jovalide! \nSigurohuni qe keni shkruar argumentet si ne vijim:  \n" +
+                            "ds numerical encode <text>: per ta enkoduar tekstin ne pozitat alfabetike te shkronjave.\n" +
+                            "ds numerical decode <code>: per ta dekoduar vargun <code> nga shifrat ne shkronjat perkatese.\n" +
+                            "ds numerical encode --separator <char> <text>: per ta paraqitur tekstin e enkoduar te ndare me ane"+
+                                  " te karakterit te specifikuar.\n"
+                                 
+                            );
+              
+              }
+
+            }
             
             else if ("rail-fence".Equals(args[0]))
             {
@@ -163,11 +161,11 @@ namespace ds
                 }
                 else
                 {
-                    Console.WriteLine("\nArgumente jovalide! \nSiguroheni qe keni shkruar argumentet si ne vijim:  \n" +
-                            "ds rail-fence encrypt <rails> <text>: per enkriptimin e plaintext-it\n" +
-                            "ds rail-fence decrypt <rails> <text>: per dekriptimin e ciphertext-it\n" +
-                            "ds rail-fence encrypt show <rails> <text>: per te pare tekstin e enkriptuar te organizuar\n" +
-                            "ds rail-fence decrypt show <rails> <text>: per te pare tekstin e dekriptuar te organizuar\n");
+                    Console.WriteLine("\nArgumentet jane jovalide! \nSigurohuni qe keni shkruar argumentet si ne vijim:  \n" +
+                            "ds rail-fence encrypt <rails> <plaintext>: per enkriptimin e plaintext-it\n" +
+                            "ds rail-fence decrypt <rails> <ciphertext>: per dekriptimin e ciphertext-it\n" +
+                            "ds rail-fence encrypt show <rails> <plaintext>: per te pare tekstin e enkriptuar te organizuar\n" +
+                            "ds rail-fence decrypt show <rails> <ciphertext>: per te pare tekstin e dekriptuar te organizuar\n");
 
                 }
 
