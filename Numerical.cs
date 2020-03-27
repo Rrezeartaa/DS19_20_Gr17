@@ -41,6 +41,26 @@ namespace ds
                 Console.Write(c);
             }
         }
+         public static string separator(string separator, string input)
+        {
+            string s = "";
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (Char.IsLetter(input[i]))
+                {
+                    int nr = (int)input[i] - 'a' + 1;
+                    s = s + Convert.ToString(nr) + " ";
+                }
+                else
+                {
+                    s = s + separator[0] + " ";
+                }
+            }
+            return s;
+
+        }
+
+
     }
 
 }
