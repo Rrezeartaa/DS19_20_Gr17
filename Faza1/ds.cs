@@ -126,7 +126,7 @@ namespace ds
                 if ("encrypt".Equals(args[1]))
                 {
 
-                    if ("show".Equals(args[2]))
+                    if ("--show".Equals(args[2]))
                     {
                         string plaintext = args[4];
                         string result = Railfence.encrypt(plaintext, int.Parse(args[3]));
@@ -164,8 +164,8 @@ namespace ds
                     Console.WriteLine("\nArgumentet jane jovalide! \nSigurohuni qe keni shkruar argumentet si ne vijim:  \n" +
                             "ds rail-fence encrypt <rails> <plaintext>: per enkriptimin e plaintext-it\n" +
                             "ds rail-fence decrypt <rails> <ciphertext>: per dekriptimin e ciphertext-it\n" +
-                            "ds rail-fence encrypt show <rails> <plaintext>: per te pare tekstin e enkriptuar te organizuar\n" +
-                            "ds rail-fence decrypt show <rails> <ciphertext>: per te pare tekstin e dekriptuar te organizuar\n");
+                            "ds rail-fence encrypt --show <rails> <plaintext>: per te pare tekstin e enkriptuar te organizuar\n" +
+                            "ds rail-fence decrypt --show <rails> <ciphertext>: per te pare tekstin e dekriptuar te organizuar\n");
 
                 }
 
