@@ -94,6 +94,29 @@ namespace ds
                         Console.ReadKey();
                     
                 }
+                  else  if ("encode".Equals(args[1]))
+                {
+                    if ("--separator".Equals(args[2]))
+                    {
+                     
+                        string result = Numerical.Encode(args[4]);
+                        string resultt = Numerical.separator(args[3], args[4]);
+                        Console.WriteLine(result);
+                        Console.WriteLine(resultt);
+                        Console.ReadKey();
+
+
+                    }
+
+                    else
+                    {
+                        string input = args[2];
+                        string result = Numerical.Encode(input);
+                        Console.WriteLine(result);
+                        Console.ReadKey();
+                    }
+                    
+                }
 
             }
                 
