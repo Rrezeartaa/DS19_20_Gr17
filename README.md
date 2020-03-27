@@ -7,18 +7,6 @@ Ekzekutimi i programit bëhet prej Command Prompt duke i dhënë vlerat e argume
 
 
 
-Komanda rail-fence
-
-Për këtë komandë jemi bazuar në disa linqe me tutoriale të ndryshëm një ndër to edhe http://practicalcryptography.com/ciphers/rail-fence-cipher/ .
-Rail-fence cipher është shumë i lehtë për tu zbuluar. Celësi i saj është numri i shiritave (rails). Ajo punon në këtë parim:"shkruaj shkronjat përgjatë kolonave, lexo përgjatë rreshtave". Kodin për këtë komandë e kemi shkruar duke u bazuar në modelin që kemi hasur në  këtë link dhe shumicën e literaturave.
-
-Nënkomanda encrypt
-
-Me anë të kësaj nënkomande bëhet enkriptimi i plaintext-it në ciphertext. Në programin tonë kjo komandë është realizuar përmes një metode që ka dy parametra: plaintext-in dhe numrin e shiritave.
-
-Nënkomanda decrypt
-
-Me anë të kësaj nënkomande bëhet dekriptimi i ciphertext-it në plaintext. Në programin tonë kjo komandë është realizuar përmes një metode që ka dy parametra: ciphertext-in dhe numrin e shiritave.
 
 Komanda Numerical
 Përmes kësaj komande është mundësuar zevendësimi i secilës shkronjë me pozitën e tyre në alfabet dhe anasjelltas.
@@ -33,10 +21,45 @@ Nenkomanda Decode
 
 Dekodon vargun <code> nga shifrat në shkronjat përkatëse.
 
+Komanda rail-fence
+
+Për këtë komandë jemi bazuar në disa linqe me tutoriale të ndryshme: http://practicalcryptography.com/ciphers/rail-fence-cipher .
+Rail-fence cipher është shumë i lehtë për tu zbuluar. Celësi i saj është numri i shiritave (rails). Ajo punon në këtë parim:"shkruaj shkronjat përgjatë kolonave, lexo përgjatë rreshtave". Kodin për këtë komandë e kemi shkruar duke u bazuar në modelin që kemi hasur në  këtë link dhe shumicën e literaturave.
+
+Nënkomanda encrypt
+
+Me anë të kësaj nënkomande bëhet enkriptimi i plaintext-it në ciphertext. Në programin tonë kjo komandë është realizuar përmes një metode që ka dy parametra: plaintext-in dhe numrin e shiritave.
+
+Nënkomanda decrypt
+
+Me anë të kësaj nënkomande bëhet dekriptimi i ciphertext-it në plaintext. Në programin tonë kjo komandë është realizuar përmes një metode që ka dy parametra: ciphertext-in dhe numrin e shiritave.
+
+Nënkomanda --show
+
+Kjo nënkomandë paraqet tekstin e organizuar në shirita (në formë valore) sipas së cilës bëhet edhe enkriptimi i tekstit. Për këtë jemi bazuar në këtë link:
+ https://www.geeksforgeeks.org/print-string-wave-pattern/ 
+
 3. Shembuj të ekzekutimit:
 
 
 
+
+
+
+Nënkomanda Encode
+
+C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds numerical encode "takohemineser"
+
+20 1 11 15 8 5 13 9 14 5 19 5 18
+
+
+Nënkomanda decode 
+
+
+C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds numerical decode "20 1 11 15 8 5 13 9 14 5 19 5 18"
+
+
+takohemineser
 
 
 Komanda rail-fence
@@ -63,17 +86,11 @@ takohemi neser
 C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence decrypt 5 "deoiemnkmrkpat peeatiijtsr u"
 departamenti i kompjuterikes
 
-Nënkomanda Encode
-
-C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds numerical encode "takohemineser"
-
-20 1 11 15 8 5 13 9 14 5 19 5 18
+Shembull me shtimin e nënkomandëes --show:
 
 
-Nënkomanda decode 
-
-
-C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds numerical decode "20 1 11 15 8 5 13 9 14 5 19 5 18"
-
-
-takohemineser
+C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence encrypt show 3 "takohemi neser"
+th eaoeinsrkme
+t       h               e
+  a   o   e   i   n   s   r
+    k       m       e
