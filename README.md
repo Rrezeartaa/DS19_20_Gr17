@@ -62,35 +62,3 @@ C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds numerical decode "20 1 11 15 8 5 
 takohemineser
 
 
-Komanda rail-fence
-
-Nënkomanda encrypt
-
-Microsoft Windows [Version 10.0.18362.535]
-(c) 2019 Microsoft Corporation. All rights reserved.
-
-C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence encrypt 3 "takohemi neser"
-
-th eaoeinsrkme
-
-C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence encrypt 5 "departamenti i kompjuterikes"
-
-deoiemnkmrkpat peeatiijtsr u
-
-Nënkomanda decrypt
-
-C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence decrypt 3 "th eaoeinsrkme"
-
-takohemi neser
-
-C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence decrypt 5 "deoiemnkmrkpat peeatiijtsr u"
-departamenti i kompjuterikes
-
-Shembull me shtimin e nënkomandëes --show:
-
-
-C:\Users\Admin\source\repos\ds\ds\bin\Debug>ds rail-fence encrypt show 3 "takohemi neser"
-th eaoeinsrkme
-t       h               e
-  a   o   e   i   n   s   r
-    k       m       e
