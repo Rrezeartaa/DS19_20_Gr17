@@ -10,7 +10,6 @@ namespace ds
     {
         public static string Encode(string input)
         {
-
             string result = "";
 
             Regex rgx = new Regex("[^A-Za-z]");
@@ -20,7 +19,6 @@ namespace ds
 
             for (int i = 0; i < s.Length; i++)
             {
-
                 index = (int)s[i] % 32;
 
                 if (index > 0 && index < 27)
@@ -28,7 +26,6 @@ namespace ds
                     result += index + " ";
                 }
             }
-
             return result.Trim();
         }
         public static void Decode(String ciphertext)
@@ -57,10 +54,6 @@ namespace ds
                 }
             }
             return s;
-
         }
-
-
     }
-
 }
