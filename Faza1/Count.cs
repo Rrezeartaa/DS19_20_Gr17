@@ -17,18 +17,14 @@ namespace ds
             {
                 lines++;
                 start++;
-            }
-            
-            return lines;
-  
-        }
-
+            }            
+            return lines;  
+        }        
         
         public static int countwords(String text)
         {
             int l = 0;
             int word = 1;
-
             while (l <= text.Length - 1)
             {
                 if (text[l] == ' ' || text[l] == '\n' || text[l] == '\t')
@@ -40,6 +36,7 @@ namespace ds
             }
             return word;
         }
+        
         public static int countletters(String text)
         {
             int nriShkronjave = 0;
@@ -54,8 +51,6 @@ namespace ds
             }
             return nriShkronjave;
         }
-
-        
 
         public static int countsymbols(String text)
         {
@@ -120,7 +115,8 @@ namespace ds
         {
             return text.Length - countspaces(text) - countvowels(text) - countsymbols(text);
         }
-public static int countsent(String strin)
+        
+        public static int countsent(String strin)
         {
             char[] chars = strin.ToLower().ToCharArray();
             int sent=0;
