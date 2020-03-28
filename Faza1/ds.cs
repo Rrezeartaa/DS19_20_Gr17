@@ -168,16 +168,74 @@ namespace ds
                             "ds rail-fence decrypt --show <rails> <ciphertext>: per te pare tekstin e dekriptuar te organizuar\n");
 
                 }
+                
 
             }
             
+            else if ("rail-fence1".Equals(args[0]))
+            {
+                if ("encrypt".Equals(args[1]))
+                {
+
+                    if ("--show".Equals(args[2]))
+                    {
+                        string plaintext = args[4];
+                        
+                        railfence1.encrypt1(plaintext, int.Parse(args[3]));
+                        railfence1.show1(plaintext, int.Parse(args[3]));
+
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        string plaintext = args[3];
+                       railfence1.encrypt1(plaintext, int.Parse(args[2]));
+                        
+                        Console.ReadKey();
+                    }
+
+                }
+                else if ("decrypt".Equals(args[1]))
+                {
+                    if ("show".Equals(args[2]))
+                    {
+                        string ciphertext = args[4];
+                        string result= railfence1.decrypt1(ciphertext, int.Parse(args[3]));
+                        Console.WriteLine(result);
+                        railfence1.show1(ciphertext, int.Parse(args[3]));
+                      Console.ReadKey();
+                      
+                    }
+                    else
+                    {
+                        string ciphertext = args[3];
+                        string result = railfence1.decrypt1(ciphertext, int.Parse(args[2]));
+                        Console.WriteLine(result);
+
+                        Console.ReadKey();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("\nArgumentet jane jovalide! \nSigurohuni qe keni shkruar argumentet si ne vijim:  \n" +
+                            "ds rail-fence1 encrypt <rails> <text>: per enkriptimin e plaintext-it\n" +
+                            "ds rail-fence1 decrypt <rails> <text>: per dekriptimin e ciphertext-it\n" +
+                            "ds rail-fence1 encrypt --show <rails> <text>: per te pare tekstin e enkriptuar te organizuar\n" +
+                            "ds rail-fence1 decrypt --show <rails> <text>: per te pare tekstin e dekriptuar te organizuar\n" 
+                            
+                            );
+
+                }
+
+            }
             
             else
             {
                 Console.WriteLine("\nArgumentet jane jovalide. Argumenti i pare eshte njeri prej funksioneve tona: \n" +
                         " count\n" +
                         " numerical\n" +
-                        " rail-fence\n\n");
+                        " rail-fence\n"+
+                                  "rail-fence1\n\n");
                 
             }
 
