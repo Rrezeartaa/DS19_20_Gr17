@@ -7,7 +7,9 @@ të argumenteve, atëherë do t'ju paraqiten Exceptions.
 Përshkrim i shkurtër për komandat:
 Komanda count
 Komanda count përdoret për të numëruar elementët e një teksti ose vetitë e një objekti.
-
+Përmes kësaj komande ne mundesuam numrimin e rreshtave te nje tekti me $ds count line,
+numrerimin e fjaleve $ds count words , numrin e shkonjave ne tekstin e dhënë $ds count letters,
+dhe simboleve $ds count symbols.
 Komanda Numerical 
 
 Përmes kësaj komande është mundësuar zevendësimi i secilës shkronjë me pozitën e tyre në alfabet dhe anasjelltas. Kemi arritur që 
