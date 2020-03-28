@@ -11,6 +11,10 @@ Përmes kësaj komande ne mundesuam numrimin e rreshtave te nje tekti me $ds cou
 numrerimin e fjaleve $ds count words , numrin e shkonjave ne tekstin e dhënë $ds count letters,
 dhe simboleve $ds count symbols.
 Gjithashtu komandat e tjera shtes për numerimin e zanorev  , bashtingëllorve dhe fjalive.
+
+
+
+
 Komanda Numerical 
 
 Përmes kësaj komande është mundësuar zevendësimi i secilës shkronjë me pozitën e tyre në alfabet dhe anasjelltas. Kemi arritur që 
