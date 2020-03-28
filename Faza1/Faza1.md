@@ -5,6 +5,8 @@ Varësisht prej vlerave të argumenteve që i japim, e thirrim komandën dhe në
 të argumenteve, atëherë do t'ju paraqiten Exceptions.
 
 Përshkrim i shkurtër për komandat:
+Komanda count
+Komanda count përdoret për të numëruar elementët e një teksti ose vetitë e një objekti.
 
 Komanda Numerical 
 
