@@ -62,6 +62,7 @@ namespace ds
                             "ds count vowels <text>: per te llogaritur numrin e zanoreve\n" +
                             "ds count consonants <text>: per te llogaritur numrin e bashketingelloreve\n"+
                             "ds count sentences <text>: per te llogaritur numrin e fjalive\n");
+                    Environment.Exit(2);
                 }
             }
              else if ("numerical".Equals(args[0]))
@@ -96,7 +97,8 @@ namespace ds
                             "ds numerical encode <text>: per ta enkoduar tekstin ne pozitat alfabetike te shkronjave.\n" +
                             "ds numerical decode <code>: per ta dekoduar vargun <code> nga shifrat ne shkronjat perkatese.\n" +
                             "ds numerical encode --separator <char> <text>: per ta paraqitur tekstin e enkoduar te ndare me ane"+
-                            " te karakterit te specifikuar.\n");              
+                            " te karakterit te specifikuar.\n");    
+                  Environment.Exit(2);
               }
 
             }
@@ -132,6 +134,7 @@ namespace ds
                             "ds rail-fence encrypt <rails> <plaintext>: per enkriptimin e plaintext-it\n" +
                             "ds rail-fence decrypt <rails> <ciphertext>: per dekriptimin e ciphertext-it\n" +
                             "ds rail-fence encrypt --show <rails> <text>: per te pare tekstin e enkriptuar te organizuar ne shirita\n");
+                    Environment.Exit(2);
                 }
             }
             else
@@ -140,6 +143,7 @@ namespace ds
                         " count\n" +
                         " numerical\n" +
                         " rail-fence\n\n");
+                Environment.Exit(2);
             }
         }
     }
