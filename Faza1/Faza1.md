@@ -5,7 +5,12 @@ Varësisht prej vlerave të argumenteve që i japim, e thirrim komandën dhe në
 të argumenteve, atëherë do t'ju paraqiten Exceptions.
 
 Përshkrim i shkurtër për komandat:
+
+
 Komanda count
+
+
+
 Komanda count përdoret për të numëruar elementët e një teksti ose vetitë e një objekti.
 Përmes kësaj komande ne mundesuam numrimin e rreshtave te nje tekti me $ds count line,
 numrerimin e fjaleve $ds count words , numrin e shkonjave ne tekstin e dhënë $ds count letters,
@@ -18,16 +23,20 @@ Gjithashtu komandat e tjera shtes për numerimin e zanorev  , bashtingëllorve d
 Komanda Numerical 
 
 Përmes kësaj komande është mundësuar zevendësimi i secilës shkronjë me pozitën e tyre në alfabet dhe anasjelltas. Kemi arritur që 
-shkronjën a të zevëndesojmë me numërin 1 b=2,c=3 etj duke u bazuar dhe merre informacione ne këtë resurse burimore:
+shkronjën --a-- të zevëndesojmë me numërin 1 b=2,c=3 etj duke u bazuar dhe merre informacione ne këtë resurs burimor:
 https://docs.microsoft.com/en-us/dotnet/standard/base-types/character-encoding
 
 Nenkomanda Encode
 
-Enkodon tekstin në pozitat alfabetike të shkronjave.
+
+Kodimi është procesi i vendosjes së një sekuence personazhesh (shkronja, numra, pikësim dhe simbole të caktuara) në një format të specializuar për transmetim ose ruajtje efikase.Ne kete rast enkodon tekstin në pozitat alfabetike të shkronjave.
 
 Nenkomanda Decode
 
-Dekodon vargun nga shifrat në shkronjat përkatëse.
+Dekodimi është procesi i kundërt - shndërrimi i një formati të koduar përsëri në sekuencën origjinale të karaktereve.Ne kete rast dekodon vargun nga shifrat në shkronjat përkatëse.
+
+
+
 
 Komanda rail-fence
 
