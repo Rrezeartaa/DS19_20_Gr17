@@ -137,6 +137,12 @@ namespace ds
                     Environment.Exit(2);
                 }
             }
+            //Faza e dyte
+            else if ("create-user".Equals(args[0]))
+            {
+                string name = args[1];
+                rsa.GenKey(args[1]);              
+            }
             else
             {
                 Console.WriteLine("\nArgumentet jane jovalide. Argumenti i pare eshte njeri prej funksioneve tona: \n" +
