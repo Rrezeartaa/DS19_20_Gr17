@@ -11,7 +11,7 @@ namespace ds
     {
         public static void Main(string[] args)
         {
-            if (args.Length < 3)
+            if (args.Length < 2)
             {
                 throw new IndexOutOfRangeException("\n\tNuk ka argumente te mjaftueshme!" +
                                                         "\n\tFunksionet e ketij programi pranojne 4 ose 5 argumente!");
@@ -142,6 +142,11 @@ namespace ds
             {
                 string name = args[1];
                 rsa.GenKey(args[1]);              
+            }
+            else if ("delete-user".Equals(args[0]))
+            {
+                string name = args[1];
+                rsa.DeleteKey(args[1]);
             }
             else
             {
