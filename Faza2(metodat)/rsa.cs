@@ -47,7 +47,41 @@ namespace ds
             }
       
         }
+        
+         public static void DeleteKey(string name)
+        {
+            string publicKeyFile = "keys/" + name + ".pub.xml";
+            string privateKeyFile = "keys/" + name + ".xml";
+            using (var rsa = new RSACryptoServiceProvider((int)KeySizes.SIZE_2048))
+            {
+                if (File.Exists(publicKeyFile) && File.Exists(privateKeyFile))
+                {
+                    rsa.PersistKeyInCsp = false;
+                    if (File.Exists(privateKeyFile))
+                        File.Delete(privateKeyFile);
+                    if (File.Exists(publicKeyFile))
+                        File.Delete(publicKeyFile);
+                    Console.WriteLine("Eshte larguar celesi privat '" + privateKeyFile + "'");
+                    Console.WriteLine("Eshte larguar celesi publik '" + publicKeyFile + "'");
+                }
+                else if (File.Exists(publicKeyFile)) {
+                    rsa.PersistKeyInCsp = false;
+                    if (File.Exists(publicKeyFile))
+                        File.Delete(publicKeyFile);
+                    Console.WriteLine("Eshte larguar celesi publik '" + publicKeyFile + "'");
 
+                }
+                else if (File.Exists(privateKeyFile)) {
+                    rsa.PersistKeyInCsp = false;
+                    if (File.Exists(privateKeyFile))
+                        File.Delete(privateKeyFile);
+                    Console.WriteLine("Eshte larguar celesi privat '" + privateKeyFile + "'");
+                }
+                else
+                    Console.WriteLine("Gabim: Celesi '" + name + "' nuk ekziston.");
+
+            }
+        }
      
 
     }
