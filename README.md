@@ -68,6 +68,12 @@ Komanda delete-user
 Kjo komandë fshin të gjithë celësat ekzistues të shfrytëzuesit të cilin ne ia shkruajmë emrin. 
 Sintaksa: ds delete-user <name>
 Nëse dëshirojmë të fshijmë përdoruesin i cili nuk ekziston, atëherë na paraqitet një mesazh gabimi.
+
+Komanda export-key
+Komanda export-key në thelb përmban exportimin e celësit privat apo publik të shfrytëzuesit.Sintaksa për thirrjen e kësaj komande bëhet si në vijim:ds export-key <public|private> <name> [file] 
+  Ku me anë të argumentit <public|private> e përcakton llojin e çelësit që eksportohet.
+  Me anë të <name> e përcakton çelësin e cilit shfrytëzues të eksportohet.
+
   
 Komanda import-key
 
