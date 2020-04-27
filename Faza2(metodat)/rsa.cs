@@ -86,6 +86,16 @@ namespace ds
         {
             string publicKeyFile = "keys/" + name + ".pub.xml";
             string privateKeyFile = "keys/" + name + ".xml";
+             using (var rsa = new RSACryptoServiceProvider((int)KeySizes.SIZE_2048))
+            {
+                if (public_private.Equals("public"))
+                {
+                    if (File.Exists(publicKeyFile))
+
+                    {
+                        RSAParameters objParameters = rsa.ExportParameters(false);                      
+                        Console.WriteLine(rsa.ToXmlString(false));
+                    }
              
              
              
