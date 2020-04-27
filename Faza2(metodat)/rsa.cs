@@ -96,7 +96,10 @@ namespace ds
                         RSAParameters objParameters = rsa.ExportParameters(false);                      
                         Console.WriteLine(rsa.ToXmlString(false));
                     }
-             
+             else
+                        Console.WriteLine("Gabim:Celesi publik '"+name+"' nuk ekziston");
+                   
+                }
              
              
              
