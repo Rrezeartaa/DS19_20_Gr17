@@ -88,6 +88,10 @@ namespace ds
 
             string publicKeyFile = "keys/" + name + ".pub.xml";
             string privateKeyFile = "keys/" + name + ".xml";
+            CspParameters csp = new CspParameters();
+            using (var rsa = new RSACryptoServiceProvider(csp))
+            {
+                FileInfo fi = new FileInfo(Path.Combine(path));
      
 
     }
