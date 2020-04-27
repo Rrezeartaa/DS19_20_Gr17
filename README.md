@@ -73,6 +73,8 @@ Komanda export-key
 Komanda export-key në thelb përmban exportimin e celësit privat apo publik të shfrytëzuesit.Sintaksa për thirrjen e kësaj komande bëhet si në vijim:ds export-key <public|private> <name> [file] 
   Ku me anë të argumentit <public|private> e përcakton llojin e çelësit që eksportohet.
   Me anë të <name> e përcakton çelësin e cilit shfrytëzues të eksportohet.
+  Ndërsa, argumenti [file] i cili është opcional e përcakton shtegun e fajllit se ku do të ruhet çelësi i eksportuar. Nëse
+mungon argumenti atëherë çelësi do të shfaqet në console.Varësisht cilin lloj të celësit e kemi kërkuara, atë privat apo publik shfaqet në ekran.
 
   
 Komanda import-key
