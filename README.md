@@ -68,3 +68,15 @@ Komanda delete-user
 Kjo komandë fshin të gjithë celësat ekzistues të shfrytëzuesit të cilin ne ia shkruajmë emrin. 
 Sintaksa: ds delete-user <name>
 Nëse dëshirojmë të fshijmë përdoruesin i cili nuk ekziston, atëherë na paraqitet një mesazh gabimi.
+  
+Komanda import-key
+
+Kjo komandë ka për qëllim të importojë celësin publik ose privat të shfrytëzuesit nga shtegu që kemi dhënë pra shtegut <path> dhe i vëndos ata në folderin "keys" në këtë rast.
+Sintaksa: ds import-key <name> <path>
+<name> e përcakton emrin e çelësit që do të ruhet në direktoriumin keys.
+<path> e përcakton shtegun e çelësit që do të importohet.
+CelArgumenti <name> e përcakton emrin e çelësit që do të ruhet në direktoriumin keys.
+Argumenti <path> e përcakton shtegun e çelësit që do të importohet.
+Celësi mundët më qenë publik ose privat dhe kemi mundesuar qe programi automatikisht të kupton se qfarë lloj i celësit është duke e shikuar përmbajtjen e fajllit që importohet.Nëse celësi që importohet  është privat automatikish gjenerohet edhe celvsi publik në menyrë që të dytë te ruhen në "keys".  
+  
+  
