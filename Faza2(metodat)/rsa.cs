@@ -103,6 +103,28 @@ namespace ds
                         csp.KeyContainerName = publicKeyFile;
 
                         string publicKeyText = reader.ReadToEnd();
+                         using (StreamWriter writer = new StreamWriter(publicKeyFile))
+
+                        {
+
+                            writer.Write(rsa.ToXmlString(false));
+
+                        }
+                        
+
+                        rsa.PersistKeyInCsp = true;
+
+                    }
+                   
+                }
+
+               
+                else Console.WriteLine("...");
+
+            }
+
+
+        }
      
 
     }
