@@ -92,6 +92,17 @@ namespace ds
             using (var rsa = new RSACryptoServiceProvider(csp))
             {
                 FileInfo fi = new FileInfo(Path.Combine(path));
+                 if (File.Exists(path))
+
+                {
+
+                    using (StreamReader reader = new StreamReader(path))
+
+                    {
+
+                        csp.KeyContainerName = publicKeyFile;
+
+                        string publicKeyText = reader.ReadToEnd();
      
 
     }
