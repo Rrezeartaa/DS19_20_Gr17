@@ -82,6 +82,12 @@ namespace ds
 
             }
         }
+        public static void ImportKey(string name, string path)
+        {
+
+
+            string publicKeyFile = "keys/" + name + ".pub.xml";
+            string privateKeyFile = "keys/" + name + ".xml";
      
 
     }
