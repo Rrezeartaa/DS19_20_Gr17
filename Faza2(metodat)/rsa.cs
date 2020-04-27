@@ -100,7 +100,21 @@ namespace ds
                         Console.WriteLine("Gabim:Celesi publik '"+name+"' nuk ekziston");
                    
                 }
-             
+                             else if (public_private.Equals("private"))
+                {
+                    if (File.Exists(privateKeyFile))
+
+                    {
+                        RSAParameters objParameters = rsa.ExportParameters(true);                      
+                        Console.WriteLine(rsa.ToXmlString(true));
+                    }
+                    else
+                        Console.WriteLine("Gabim:Celesi privat '" + name + "' nuk ekziston");
+
+
+                }
+            }
+        }
              
              
         public static void ImportKey(string name, string path)
