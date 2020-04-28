@@ -88,13 +88,19 @@ namespace ds
             string privateKeyFile = "keys/" + name + ".xml";
              using (var rsa = new RSACryptoServiceProvider((int)KeySizes.SIZE_2048))
             {
-                if (public_private.Equals("public"))
+                 if (public_private.Equals("public"))
                 {
                     if (File.Exists(publicKeyFile))
 
                     {
-                        RSAParameters objParameters = rsa.ExportParameters(false);                      
-                        Console.WriteLine(rsa.ToXmlString(false));
+                        using (StreamReader reader = new StreamReader(publicKeyFile))
+                        {
+                            //csp.KeyContainerName = file;
+                            string filetext = reader.ReadToEnd();
+                            Console.WriteLine(filetext);
+                        }
+                           // publicKey = rsa.ExportParameters(false);
+                        
                     }
              else
                         Console.WriteLine("Gabim:Celesi publik '"+name+"' nuk ekziston");
@@ -105,8 +111,12 @@ namespace ds
                     if (File.Exists(privateKeyFile))
 
                     {
-                        RSAParameters objParameters = rsa.ExportParameters(true);                      
-                        Console.WriteLine(rsa.ToXmlString(true));
+                        using (StreamReader reader = new StreamReader(privateKeyFile))
+                        {
+                            //csp.KeyContainerName = file;
+                            string filetext = reader.ReadToEnd();
+                            Console.WriteLine(filetext);
+                        }
                     }
                     else
                         Console.WriteLine("Gabim:Celesi privat '" + name + "' nuk ekziston");
