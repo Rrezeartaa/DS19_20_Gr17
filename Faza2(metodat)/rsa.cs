@@ -239,7 +239,13 @@ namespace ds
                     {
                         csp.KeyContainerName = privateKeyFile;
 
-                        string Text = reader.ReadToEnd();    
+                        string Text = reader.ReadToEnd(); 
+                        if (Text.Contains("InverseQ"))
+                        {
+                            using (StreamWriter writer = new StreamWriter(publicKeyFile))
+                            {
+                                
+                                writer.Write("?");
 
                     }
                    
