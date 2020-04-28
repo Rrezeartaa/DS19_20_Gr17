@@ -213,7 +213,15 @@ namespace ds
                         
 
                         rsa.PersistKeyInCsp = true;
-                        Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'.");    
+                        Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'."); 
+                         } 
+                        }
+
+                    using (StreamReader reader = new StreamReader(path))
+                    {
+                        csp.KeyContainerName = privateKeyFile;
+
+                        string Text = reader.ReadToEnd();    
 
                     }
                    
