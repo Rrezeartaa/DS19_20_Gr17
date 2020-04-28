@@ -161,12 +161,25 @@ namespace ds
             else if ("import-key".Equals(args[0])) {
                 rsa.ImportKey(args[1], args[2]);
             }
+            else if ("write-message".Equals(args[0]))
+            {
+
+            }
+            else if ("read-message".Equals(args[0]))
+            {
+
+            }
             else
             {
                 Console.WriteLine("\nArgumentet jane jovalide. Argumenti i pare eshte njeri prej funksioneve tona: \n" +
                         " count\n" +
                         " numerical\n" +
-                        " rail-fence\n\n");
+                        " rail-fence\n"+
+                        "create-user\n"+
+                        "delete-user\n"+
+                        "export-key\n"+
+                        "write-message\n"+
+                        "read-message\n\n");
                 Environment.Exit(2);
             }
         }
