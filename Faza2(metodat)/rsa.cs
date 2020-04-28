@@ -253,8 +253,10 @@ namespace ds
                                 writer.Write(Text);
                             }
                             rsa.PersistKeyInCsp = true;
-
-                   
+                               Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'");
+                            Console.WriteLine("Celesi privat u ruajt ne fajllin '" + privateKeyFile + "'");
+                        }
+                    }
                 }
 
                
