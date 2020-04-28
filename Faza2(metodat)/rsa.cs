@@ -185,10 +185,17 @@ namespace ds
             CspParameters csp = new CspParameters();
             using (var rsa = new RSACryptoServiceProvider(csp))
             {
-                FileInfo fi = new FileInfo(Path.Combine(path));
-                 if (File.Exists(path))
-
+                if (File.Exists(path))
                 {
+                    if (path.EndsWith(".png"))
+                    {
+                        Console.WriteLine("Gabim: Fajlli i dhene nuk eshte celes valid.");
+                    }
+                    else if (File.Exists(publicKeyFile))
+                        Console.WriteLine("Celesi publik vecse ekziston!");
+                    else
+
+               
 
                     using (StreamReader reader = new StreamReader(path))
 
