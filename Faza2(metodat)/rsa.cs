@@ -116,7 +116,66 @@ namespace ds
             }
         }
              
-             
+        public static void ExportKey1(string public_private, string name, string file)
+        {
+            string publicKeyFile = "keys/" + name + ".pub.xml";
+            string privateKeyFile = "keys/" + name + ".xml";
+            CspParameters csp = new CspParameters();
+            using (var rsa = new RSACryptoServiceProvider((int)KeySizes.SIZE_2048))
+            {
+                if (public_private.Equals("public"))
+                {
+                    if (File.Exists(publicKeyFile))
+
+                    {
+                        if (!(File.Exists(publicKeyFile)))
+
+                            File.Create(file);
+                        using (StreamReader reader = new StreamReader(publicKeyFile))
+                        {
+                            csp.KeyContainerName = file;
+                            string filetext = reader.ReadToEnd();
+                            using (StreamWriter writer = new StreamWriter(file))
+                            {
+
+                                writer.Write(filetext);
+                            }
+                            rsa.PersistKeyInCsp = true;
+                            Console.WriteLine("Celesi publik u ruajt ne fajllin '" + file + "'");
+                        }
+                    }
+
+                    else
+                        Console.WriteLine("Gabim: Celesi publik '" + name + "' nuk ekziston");
+                }
+
+                else if (public_private.Equals("private"))
+                {
+                    if (File.Exists(privateKeyFile))
+                    {
+                        if (!(File.Exists(privateKeyFile)))
+                            File.Create(file);
+                        using (StreamReader reader = new StreamReader(privateKeyFile)) {
+                            csp.KeyContainerName = file;
+                            string filetext = reader.ReadToEnd();
+                            using (StreamWriter writer = new StreamWriter(file))
+                            {
+
+                                writer.Write(filetext);
+                            }
+                            rsa.PersistKeyInCsp = true;
+                            Console.WriteLine("Celesi privat u ruajt ne fajllin '" + file + "'");
+                        }
+                    
+                    }
+                    else
+                        Console.WriteLine("Gabim:Celesi privat '" + name + "' nuk ekziston");
+                }
+            }
+
+
+        } 
+        
         public static void ImportKey(string name, string path)
         {
 
