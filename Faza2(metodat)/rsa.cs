@@ -86,7 +86,6 @@ namespace ds
         {
             string publicKeyFile = "keys/" + name + ".pub.xml";
             string privateKeyFile = "keys/" + name + ".xml";
-             CspParameters csp = new CspParameters();
              using (var rsa = new RSACryptoServiceProvider((int)KeySizes.SIZE_2048))
             {
                 if (public_private.Equals("public"))
@@ -94,14 +93,8 @@ namespace ds
                     if (File.Exists(publicKeyFile))
 
                     {
-                        using (StreamReader reader = new StreamReader(publicKeyFile))
-                        {
-                            //csp.KeyContainerName = file;
-                            string filetext = reader.ReadToEnd();
-                            Console.WriteLine(filetext);
-                        }
-                           // publicKey = rsa.ExportParameters(false);
-                        
+                        RSAParameters objParameters = rsa.ExportParameters(false);                      
+                        Console.WriteLine(rsa.ToXmlString(false));
                     }
              else
                         Console.WriteLine("Gabim:Celesi publik '"+name+"' nuk ekziston");
@@ -109,15 +102,11 @@ namespace ds
                 }
                              else if (public_private.Equals("private"))
                 {
-                       if (File.Exists(privateKeyFile))
+                    if (File.Exists(privateKeyFile))
 
                     {
-                        using (StreamReader reader = new StreamReader(privateKeyFile))
-                        {
-                            //csp.KeyContainerName = file;
-                            string filetext = reader.ReadToEnd();
-                            Console.WriteLine(filetext);
-                        }
+                        RSAParameters objParameters = rsa.ExportParameters(true);                      
+                        Console.WriteLine(rsa.ToXmlString(true));
                     }
                     else
                         Console.WriteLine("Gabim:Celesi privat '" + name + "' nuk ekziston");
@@ -224,6 +213,7 @@ namespace ds
                         
 
                         rsa.PersistKeyInCsp = true;
+                        Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'.");    
 
                     }
                    
