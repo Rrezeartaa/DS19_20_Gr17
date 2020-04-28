@@ -24,9 +24,9 @@ namespace ds
         public enum KeySizes { 
            SIZE_512=512,
            SIZE_1024=1024,
-            SIZE_2048=2048,
-            SIZE_952 = 952,
-            SIZE_1369 = 1369
+           SIZE_2048=2048,
+           SIZE_952 = 952,
+           SIZE_1369 = 1369
 
         };
         public static void GenKey(string name)
@@ -110,7 +110,7 @@ namespace ds
                            // publicKey = rsa.ExportParameters(false);
                         
                     }
-             else
+                  else
                         Console.WriteLine("Gabim:Celesi publik '"+name+"' nuk ekziston");
                    
                 }
@@ -128,7 +128,6 @@ namespace ds
                     }
                     else
                         Console.WriteLine("Gabim:Celesi privat '" + name + "' nuk ekziston");
-
 
                 }
             }
@@ -155,7 +154,6 @@ namespace ds
                             string filetext = reader.ReadToEnd();
                             using (StreamWriter writer = new StreamWriter(file))
                             {
-
                                 writer.Write(filetext);
                             }
                             rsa.PersistKeyInCsp = true;
@@ -196,8 +194,6 @@ namespace ds
         
         public static void ImportKey(string name, string path)
         {
-
-
             string publicKeyFile = "keys/" + name + ".pub.xml";
             string privateKeyFile = "keys/" + name + ".xml";
             CspParameters csp = new CspParameters();
@@ -212,13 +208,9 @@ namespace ds
                     else if (File.Exists(publicKeyFile))
                         Console.WriteLine("Celesi publik vecse ekziston!");
                     else
-
-               
-
                     using (StreamReader reader = new StreamReader(path))
 
                     {
-
                         csp.KeyContainerName = publicKeyFile;
 
                         string publicKeyText = reader.ReadToEnd();
@@ -229,7 +221,6 @@ namespace ds
                                     writer.Write(Text);
                                 }
                         
-
                         rsa.PersistKeyInCsp = true;
                         Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'."); 
                          } 
@@ -267,6 +258,14 @@ namespace ds
 
         }
      
+        public static void encrypt(string name,string message)
+        {
+
+        }
+        public static void decrypt(string encrypted-message)
+        {
+
+        }
 
     }
 }
