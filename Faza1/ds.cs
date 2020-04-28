@@ -148,6 +148,19 @@ namespace ds
                 string name = args[1];
                 rsa.DeleteKey(args[1]);
             }
+            else if ("export-key".Equals(args[0]))
+            {
+                if (args.Length == 3)
+                {
+                    rsa.ExportKey(args[1], args[2]);
+                }
+                else
+                    rsa.ExportKey1(args[1], args[2], args[3]);
+
+            }
+            else if ("import-key".Equals(args[0])) {
+                rsa.ImportKey(args[1], args[2]);
+            }
             else
             {
                 Console.WriteLine("\nArgumentet jane jovalide. Argumenti i pare eshte njeri prej funksioneve tona: \n" +
