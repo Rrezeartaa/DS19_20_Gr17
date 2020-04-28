@@ -241,13 +241,19 @@ namespace ds
 
                         string Text = reader.ReadToEnd(); 
                         if (Text.Contains("InverseQ"))
-                        {
-                            using (StreamWriter writer = new StreamWriter(publicKeyFile))
+                    {
+                    using (StreamWriter writer = new StreamWriter(publicKeyFile))
                             {
                                 
                                 writer.Write("?");
 
-                    }
+                             }
+                     using (StreamWriter writer = new StreamWriter(privateKeyFile))
+                            {
+                                writer.Write(Text);
+                            }
+                            rsa.PersistKeyInCsp = true;
+
                    
                 }
 
