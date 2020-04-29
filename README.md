@@ -52,20 +52,20 @@ Faza e dytë
 
 Udhëzimet për ekzekutimin e programit
 
-Pasi programi është i njëjtë, pra vazhdim i programit nga faza e parë, ekzekutimi bëhet nga Command Prompt duke i dhënë argumentet për komandat përkatëse.
+Pasi programi është i njëjtë, pra vazhdim i programit nga faza e parë, ekzekutimi bëhet nga Command Prompt duke i dhënë argumentet për komandat përkatëse. Pra, së pari e hapni programin me Command Prompt dhe filloni të shkruani ds dhe pas saj komandën përkatëse, p.sh. ds create-user. Pas komndës përkatëse që ju e jepni, ju duhet të jepni edhe argumentet që i pranon komanda në mënyrë që t'ju funksionojë kompajlimi dhe ekzekutimi i programit. P.sh. ds create-user blerim, argumenti "blerim" tani dërgohet si parametër tek metoda "create-user" dhe pastaj krijon përdoruesin me po këtë emër. Sintaksën se si të thirrni komandat përkatëse i keni më poshtë.
 Nëse jepni argumentet jovalide ju njoftoheni nga programi që nuk i keni dhënë argumentet si duhet ose nëse jepni ndonjë komandë që nuk ekziston gjithashtu do të njoftoheni se ajo komandë nuk ekziston.
 Kur hapet Command Prompt pra së pari shkruhet komanda pastaj argumentet përkatëse që do t'i tregojmë si më poshtë.
 
 Komanda create-user
 
-Kjo komandë gjeneron një cift të celësave (publik dhe privat) të RSA dhe i ruan me një folder përkatës, në rastin tonë në folderin "keys".
+Kjo komandë gjeneron një cift të celësave (publik dhe privat) të RSA dhe i ruan në një folder përkatës, në rastin tonë në folderin "keys".
 Sintaksa: ds create-user <name>
 name paraqet emrin me të cilin dëshirojmë të ruajmë ciftin e celësave të gjeneruar. Emri nuk guxon të përmbajë dicka tjetër përpos numrave, shkronjave dhe simbolit _.
 Madhësia e celësit është 2048. Nëse tentojmë të gjenerojmë një celës tjetër me po të njëjtin emër, atëherë programi nuk na lejon sepse ai ekziston paraprakisht.
 
 Komanda delete-user
 
-Kjo komandë fshin të gjithë celësat ekzistues të shfrytëzuesit të cilin ne ia shkruajmë emrin. 
+Kjo komandë fshin të gjithë celësat ekzistues të shfrytëzuesit të cilit ne ia shkruajmë emrin. 
 Sintaksa: ds delete-user <name>
 Nëse dëshirojmë të fshijmë përdoruesin i cili nuk ekziston, atëherë na paraqitet një mesazh gabimi.
 
