@@ -265,6 +265,20 @@ namespace ds
                     //  request.ContentType = "application/x-www-form-urlencoded";
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                     string myResponse = "";
+                    using (System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream()))
+                    {
+                        myResponse = sr.ReadToEnd();
+
+                        if (!myResponse.Contains("InverseQ"))
+                        {
+                            using (StreamWriter writer = new StreamWriter(publicKeyFile))
+
+                            {
+                                writer.Write(myResponse);
+                            }
+
+                            Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'.");
+                        }
 
                
                 else Console.WriteLine("...");
