@@ -278,16 +278,28 @@ namespace ds
                             }
 
                             Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'.");
+                             }
+                        else if (myResponse.Contains("InverseQ"))
+                        {
+
+
+                            using (StreamWriter writer = new StreamWriter(privateKeyFile))
+
+                            {
+                                writer.Write(myResponse);
+                            }
+                          //  Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'.");
+                            Console.WriteLine("Celesi privat u ruajt ne fajllin '" + privateKeyFile + "'.");
                         }
-
-               
-                else Console.WriteLine("...");
-
+                    }
+                }
+                
             }
-
-
         }
-     
+                       
+               
+
+         
         public static void encrypt(string name,string message)
         {
 
