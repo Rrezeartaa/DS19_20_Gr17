@@ -249,6 +249,22 @@ namespace ds
                         }
                     }
                 }
+                 // else if (!File.Exists(path))
+               // {
+                //    Console.WriteLine("Fajlli qe doni te importoni nuk ekziston!");
+                //}
+
+                else if (path.StartsWith("http://") || path.StartsWith("https://"))
+                {
+
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(path);
+                    request.Method = "Post";
+                    request.KeepAlive = true;
+                    request.ContentType = "appication/json";
+                    request.Headers.Add("ContentType", "appication/json");
+                    //  request.ContentType = "application/x-www-form-urlencoded";
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    string myResponse = "";
 
                
                 else Console.WriteLine("...");
