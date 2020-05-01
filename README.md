@@ -93,9 +93,9 @@ URL <path> dhe merret trupi i përgjigjes si vlera e çelësit.
 Komanda write-message
 
 E shkruan një mesazh të enkriptuar të dedikuar për një shfrytëzues.
-Sintaksa: ds write-message <name> <message> [file].
-Argumenti <name> e paraqet marrësin e mesazhit (çelësin publik).
-Argumenti <message> e paraqet mesazhin që do të enkriptohet.
+Sintaksa: ds write-message "name" "message" [file].
+Argumenti "name" e paraqet marrësin e mesazhit (çelësin publik).
+Argumenti "message" e paraqet mesazhin që do të enkriptohet.
 Argumenti opsional [file] e përcakton shtegun e fajllit se ku do të ruhet mesazhi i enkriptuar. Nëse
 mungon argumenti, atëherë mesazhi i enkriptuar do të shfaqet në console.
 Enkriptimi bëhet sipas skemës në vijim:
