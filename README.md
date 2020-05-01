@@ -99,6 +99,6 @@ Argumenti "message" e paraqet mesazhin që do të enkriptohet.
 Argumenti opsional [file] e përcakton shtegun e fajllit se ku do të ruhet mesazhi i enkriptuar. Nëse
 mungon argumenti, atëherë mesazhi i enkriptuar do të shfaqet në console.
 Enkriptimi bëhet sipas skemës në vijim:
-ciphertext = base64(utf8(<name>)) . base64(<iv>). base64(rsa(<key>)) . base64(des(<message>))
+ciphertext = base64(utf8("name")) . base64("iv"). base64(rsa("key")) . base64(des("message"))
   
   
