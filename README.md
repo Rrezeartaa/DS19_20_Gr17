@@ -89,5 +89,16 @@ Argumenti <path> e përcakton shtegun e çelësit që do të importohet.
 Celësi mundët më qenë publik ose privat dhe kemi mundesuar qe programi automatikisht të kupton se qfarë lloj i celësit është duke e shikuar përmbajtjen e fajllit që importohet.Nëse celësi që importohet  është privat automatikish gjenerohet edhe celvsi publik në menyrë që të dytë te ruhen në "keys".
 Nëse  <path> fillon me http:// ose https://, atëherë dërgohet një GET request në
 URL <path> dhe merret trupi i përgjigjes si vlera e çelësit.  
+
+Komanda write-message
+
+E shkruan një mesazh të enkriptuar të dedikuar për një shfrytëzues.
+Sintaksa: ds write-message <name> <message> [file].
+Argumenti <name> e paraqet marrësin e mesazhit (çelësin publik).
+Argumenti <message> e paraqet mesazhin që do të enkriptohet.
+Argumenti opsional [file] e përcakton shtegun e fajllit se ku do të ruhet mesazhi i enkriptuar. Nëse
+mungon argumenti, atëherë mesazhi i enkriptuar do të shfaqet në console.
+Enkriptimi bëhet sipas skemës në vijim:
+ciphertext = base64(utf8(<name>)) . base64(<iv>). base64(rsa(<key>)) . base64(des(<message>))
   
   
