@@ -303,6 +303,22 @@ namespace ds
         public static void encrypt(string name,string message)
         {
 
+            string publicKeyFile = "keys/" + name + ".pub.xml";
+
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(name);
+            var user = System.Convert.ToBase64String(plainTextBytes);
+
+            DES DESalg = DES.Create();
+            byte[] keyb = new byte[8];
+            byte[] ivb = new byte[8];
+            keyb = DESalg.Key;
+
+            ivb = DESalg.IV;
+
+            string KEY = Convert.ToBase64String(keyb);
+            string IV = Convert.ToBase64String(ivb);
+            
+            
         }
         public static void decrypt(string encrypted-message)
         {
