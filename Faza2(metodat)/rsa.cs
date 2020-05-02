@@ -320,8 +320,18 @@ namespace ds
             
             
         }
-        public static void decrypt(string encrypted-message)
+        public static void decrypt(string encryptedtext)
         {
+
+            byte[] decemri;
+            String emri;
+            String[] a = encryptedtext.Split('.');
+            //System.Convert.FromBase64String
+            decemri = System.Convert.FromBase64String(a[0]);
+            emri = System.Text.ASCIIEncoding.ASCII.GetString(decemri);
+
+            Console.WriteLine("Marresi: "+emri);
+            //Console.WriteLine("Mesazhi" + teksti);
 
         }
 
