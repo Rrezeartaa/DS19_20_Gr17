@@ -323,6 +323,21 @@ namespace ds
             rsa.FromXmlString(pubkey);
             byte[] keybytes = Convert.FromBase64String(KEY);
             string rsakey = Convert.ToBase64String(rsa.Encrypt(keybytes, true));
+             string encryptedText = string.Empty;
+            DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+            MemoryStream memoryStream = new MemoryStream();
+            CryptoStream cryptoStream = new CryptoStream(memoryStream,
+            cryptoProvider.CreateEncryptor(keybytes, ivb), CryptoStreamMode.Write);
+            StreamWriter writer = new StreamWriter(cryptoStream);
+            writer.Write(message);
+            writer.Flush();
+            cryptoStream.FlushFinalBlock();
+            writer.Flush();
+            encryptedText=Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+            string result = test + "." + IV + "." + rsakey + "." + encryptedText;
+            
+            
+                Console.Write(result);
             
             
         }
