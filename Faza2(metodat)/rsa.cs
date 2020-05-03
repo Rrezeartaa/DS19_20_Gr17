@@ -381,9 +381,28 @@ namespace ds
                 Console.WriteLine("Marresi: " + emri);
                 Console.WriteLine("Mesazhi: " + M);
             }
+              else
+                Console.WriteLine("Gabim: Celesi privat " + privateKeyFile + " nuk ekziston");
 
-            Console.WriteLine("Marresi: "+emri);
-            //Console.WriteLine("Mesazhi" + teksti);
+        }
+        public static byte[] RSAdecrypt(byte[] DESKey, string privatei, string emri)
+        {
+            byte[] decrypted;
+
+            using (var rsa = new RSACryptoServiceProvider(2048))
+            {
+                string privateFile = "keys/" + emri + ".xml";
+                
+                    privatei = File.ReadAllText(privateFile);
+                    rsa.FromXmlString(privatei);
+                    decrypted = rsa.Decrypt(DESKey, true);
+                    return decrypted;
+                
+                
+            }
+        } 
+
+          
 
         }
 
