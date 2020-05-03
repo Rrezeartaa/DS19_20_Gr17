@@ -300,11 +300,13 @@ namespace ds
             writer.Flush();
             encryptedText=Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
             string result = test + "." + IV + "." + rsakey + "." + encryptedText;
-             Console.Write(result);
+            File.WriteAllText(file, result);
+                Console.WriteLine("Mesazhi i enkriptuar u ruajt ne fajllin '"+file+"'.");
+              
             }
             else
                 Console.WriteLine("Gabim: Celesi publik '" + name + "' nuk ekziston");
-            
+
         }
         public static void decrypt(string encryptedtext)
         {
