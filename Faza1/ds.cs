@@ -163,18 +163,18 @@ namespace ds
             }
             else if ("write-message".Equals(args[0]))
             {
-
+               rsa.encrypt(args[1], args[2]);
             }
             else if ("read-message".Equals(args[0]))
-            {
-
+            {          
+                rsa.decrypt(args[1]);
             }
             else
             {
                 Console.WriteLine("\nArgumentet jane jovalide. Argumenti i pare eshte njeri prej funksioneve tona: \n" +
-                        " count\n" +
-                        " numerical\n" +
-                        " rail-fence\n"+
+                        "count\n" +
+                        "numerical\n" +
+                        "rail-fence\n"+
                         "create-user\n"+
                         "delete-user\n"+
                         "export-key\n"+
