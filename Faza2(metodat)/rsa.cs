@@ -351,6 +351,36 @@ namespace ds
             //System.Convert.FromBase64String
             decemri = System.Convert.FromBase64String(a[0]);
             emri = System.Text.ASCIIEncoding.ASCII.GetString(decemri);
+              if (File.Exists(privateKeyFile))
+            {
+
+                byte[] decIV;
+
+                byte[] decEncryptedKey;
+
+                byte[] decEncryptedMsg;
+
+                decIV = System.Convert.FromBase64String(a[1]);
+
+                decEncryptedKey = System.Convert.FromBase64String(a[2]);
+
+                decEncryptedMsg = System.Convert.FromBase64String(a[3]);
+
+                byte[] DesKey = RSAdecrypt(decEncryptedKey, privateKeyFile, emri);
+
+                DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+                MemoryStream memoryStream = new MemoryStream
+                        (Convert.FromBase64String(a[3]));
+                CryptoStream cryptoStream = new CryptoStream(memoryStream,
+                    cryptoProvider.CreateDecryptor(DesKey, decIV), CryptoStreamMode.Read);
+                StreamReader reader = new StreamReader(cryptoStream);
+                string result = reader.ReadToEnd();
+
+                String M = result;
+
+                Console.WriteLine("Marresi: " + emri);
+                Console.WriteLine("Mesazhi: " + M);
+            }
 
             Console.WriteLine("Marresi: "+emri);
             //Console.WriteLine("Mesazhi" + teksti);
