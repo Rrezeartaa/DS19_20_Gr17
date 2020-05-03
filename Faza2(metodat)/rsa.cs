@@ -351,6 +351,7 @@ namespace ds
             //System.Convert.FromBase64String
             decemri = System.Convert.FromBase64String(a[0]);
             emri = System.Text.ASCIIEncoding.ASCII.GetString(decemri);
+             string privateKeyFile = "keys/" + emri + ".xml";
               if (File.Exists(privateKeyFile))
             {
 
