@@ -305,6 +305,7 @@ namespace ds
 
             string publicKeyFile = "keys/" + name + ".pub.xml";
 
+            if (File.Exists(publicKeyFile)){
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(name);
             var user = System.Convert.ToBase64String(plainTextBytes);
 
@@ -335,10 +336,10 @@ namespace ds
             writer.Flush();
             encryptedText=Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
             string result = test + "." + IV + "." + rsakey + "." + encryptedText;
-            
-            
-                Console.Write(result);
-            
+             Console.Write(result);
+            }
+            else
+                Console.WriteLine("Gabim: Celesi publik '" + name + "' nuk ekziston");
             
         }
         public static void decrypt(string encryptedtext)
