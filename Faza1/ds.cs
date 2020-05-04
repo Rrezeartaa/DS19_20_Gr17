@@ -135,66 +135,74 @@ namespace ds
             //Faza e dyte
             else if ("create-user".Equals(args[0]))
             {
-                string name = args[1];
-                rsa.GenKey(args[1]);              
+                if (args.Length == 2)
+                {
+                    string strRegex = @"^[a-zA-Z0-9_]*$";
+                    Regex re = new Regex(strRegex);
+                    if (re.IsMatch(args[1]))
+                    {
+                        rsa.GenKey(args[1]);
+                    }
+                    else
+                        Console.WriteLine("Keni dhene karaktere qe nuk lejohen!");
+                }
+                else
+                    Console.WriteLine("Keni dhene argumente te teperta per kete komande!");               
             }
             else if ("delete-user".Equals(args[0]))
             {
-                string name = args[1];
-                rsa.DeleteKey(args[1]);
-            }
-            else if ("export-key".Equals(args[0]))
-            {
-                try
+                if (args.Length == 2)
                 {
-                if (args.Length == 3)
-                {
-                    rsa.ExportKey(args[1], args[2]);
+                    string strRegex = @"^[a-zA-Z0-9_]*$";
+                    Regex re = new Regex(strRegex);
+                    if (re.IsMatch(args[1]))
+                    {
+                        rsa.DeleteKey(args[1]);
+                    }
+                    else
+                        Console.WriteLine("Keni dhene karaktere qe nuk lejohen!");
                 }
                 else
-                    rsa.ExportKey1(args[1], args[2], args[3]);
-                }
-                catch (IndexOutOfRangeException e)
-                {
-                    Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
-                }
+                    Console.WriteLine("Keni dhene argumente te teperta per kete komande!");
 
             }
-            else if ("import-key".Equals(args[0])) {
-                try{
-                rsa.ImportKey(args[1], args[2]);
-                }
-                catch (IndexOutOfRangeException e)
-                {
+            else if ("export-key".Equals(args[0]))
+            {               
+                    if (args.Length == 3)
+                    {
+                        rsa.ExportKey(args[1], args[2]);
+                    }
+                    else if(args.Length == 4)
+                        rsa.ExportKey1(args[1], args[2], args[3]);              
+                else
                     Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
+            }
+            else if ("import-key".Equals(args[0])) {
+                if (args.Length == 3)
+                {
+                    rsa.ImportKey(args[1], args[2]);
                 }
+                else
+                    Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");                
             }
             else if ("write-message".Equals(args[0]))
-            {
-               try
-                {
-                    if (args.Length == 3)
+            {                
+                  if (args.Length == 3)
                     {
                         rsa.encrypt(args[1], args[2]);
                     }
-                    else
+                    else if(args.Length==4)
                         rsa.encrypt(args[1], args[2], args[3]);
-                }
-                catch (IndexOutOfRangeException e)
-                {
+                else
                     Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
-                }
+                
             }
             else if ("read-message".Equals(args[0]))
-            {          
-                 try
-                {
-                    rsa.decrypt(args[1]);
-                }
-                catch (IndexOutOfRangeException e)
-                {
-                    Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
-                }
+            {
+                if(args.Length==2)
+                    rsa.decrypt(args[1]);               
+                else
+                    Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");             
             }
             else
             {
