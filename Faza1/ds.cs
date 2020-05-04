@@ -11,14 +11,9 @@ namespace ds
     {
         public static void Main(string[] args)
         {
-            if (args.Length < 2)
+            if (args.Length < 2|| args.Length > 5)
             {
-                throw new IndexOutOfRangeException("\n\tNuk ka argumente te mjaftueshme!" +
-                                                        "\n\tFunksionet e ketij programi pranojne 4 ose 5 argumente!");
-            }
-            else if (args.Length > 5)
-            {
-                throw new IndexOutOfRangeException("\nNumri i argumenteve eshte i tepert!");
+                throw new IndexOutOfRangeException("\n\tFunksionet e ketij programi pranojne 2 deri ne 5 argumente!");
             }            
             else if ("count".Equals(args[0]))
             {
@@ -150,24 +145,56 @@ namespace ds
             }
             else if ("export-key".Equals(args[0]))
             {
+                try
+                {
                 if (args.Length == 3)
                 {
                     rsa.ExportKey(args[1], args[2]);
                 }
                 else
                     rsa.ExportKey1(args[1], args[2], args[3]);
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
+                }
 
             }
             else if ("import-key".Equals(args[0])) {
+                try{
                 rsa.ImportKey(args[1], args[2]);
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
+                }
             }
             else if ("write-message".Equals(args[0]))
             {
-               rsa.encrypt(args[1], args[2]);
+               try
+                {
+                    if (args.Length == 3)
+                    {
+                        rsa.encrypt(args[1], args[2]);
+                    }
+                    else
+                        rsa.encrypt(args[1], args[2], args[3]);
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
+                }
             }
             else if ("read-message".Equals(args[0]))
             {          
-                rsa.decrypt(args[1]);
+                 try
+                {
+                    rsa.decrypt(args[1]);
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
+                }
             }
             else
             {
