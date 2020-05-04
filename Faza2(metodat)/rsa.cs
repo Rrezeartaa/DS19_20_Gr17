@@ -210,10 +210,8 @@ namespace ds
                         if (Text.Contains("InverseQ"))
                     {
                     using (StreamWriter writer = new StreamWriter(publicKeyFile))
-                            {
-                                
-                                writer.Write("?");
-
+                            {                           
+                               writer.Write("?");
                              }
                      using (StreamWriter writer = new StreamWriter(privateKeyFile))
                             {
@@ -237,15 +235,12 @@ namespace ds
                     using (System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream()))
                     {
                         myResponse = sr.ReadToEnd();
-
                         if (!myResponse.Contains("InverseQ"))
                         {
                             using (StreamWriter writer = new StreamWriter(publicKeyFile))
-
                             {
                                 writer.Write(myResponse);
                             }
-
                             Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'.");
                          }
                         else if (myResponse.Contains("InverseQ"))
@@ -265,6 +260,50 @@ namespace ds
                 }
             }
         } 
+        
+         public static void encrypt(string name, string message)
+        {
+            string publicKeyFile = "keys/" + name + ".pub.xml";
+            if (File.Exists(publicKeyFile))
+            {
+                var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(name);
+                var test = System.Convert.ToBase64String(plainTextBytes);
+
+                DES DESalg = DES.Create();
+                byte[] keyb = new byte[8];
+                byte[] ivb = new byte[8];
+                keyb = DESalg.Key;
+
+                ivb = DESalg.IV;
+
+                string KEY = Convert.ToBase64String(keyb);
+                string IV = Convert.ToBase64String(ivb);
+
+                RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
+                var pubkey = File.ReadAllText(publicKeyFile);
+                rsa.FromXmlString(pubkey);
+                byte[] keybytes = Convert.FromBase64String(KEY);
+                string rsakey = Convert.ToBase64String(rsa.Encrypt(keybytes, true));
+
+                string encryptedText = string.Empty;
+                DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+                MemoryStream memoryStream = new MemoryStream();
+                CryptoStream cryptoStream = new CryptoStream(memoryStream,
+                cryptoProvider.CreateEncryptor(keybytes, ivb), CryptoStreamMode.Write);
+                StreamWriter writer = new StreamWriter(cryptoStream);
+                writer.Write(message);
+                writer.Flush();
+                cryptoStream.FlushFinalBlock();
+                writer.Flush();
+                encryptedText = Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+                string result = test + "." + IV + "." + rsakey + "." + encryptedText;
+                
+                Console.Write(result); 
+            }
+            else
+                Console.WriteLine("Gabim: Celesi publik '" + name + "' nuk ekziston");
+        }
+        
         public static void encrypt(string name,string message,string file)
         {
             string publicKeyFile = "keys/" + name + ".pub.xml";
