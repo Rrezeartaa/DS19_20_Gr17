@@ -7,11 +7,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
-using Org.BouncyCastle.Asn1.Ocsp;
 using System.Collections;
 using System.Security.Policy;
 using System.Net;
-using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Numerics;
 namespace ds
@@ -20,7 +18,6 @@ namespace ds
     {
         private static RSAParameters publicKey;
         private static RSAParameters privateKey;
-        static string CONTAINER_NAME = "MyGeneratedKeys";
         public enum KeySizes { 
            SIZE_512=512,
            SIZE_1024=1024,
@@ -57,7 +54,6 @@ namespace ds
             {
                 if (File.Exists(publicKeyFile) && File.Exists(privateKeyFile))
                 {
-                    rsa.PersistKeyInCsp = false;
                     if (File.Exists(privateKeyFile))
                         File.Delete(privateKeyFile);
                     if (File.Exists(publicKeyFile))
@@ -66,13 +62,11 @@ namespace ds
                     Console.WriteLine("Eshte larguar celesi publik '" + publicKeyFile + "'");
                 }
                 else if (File.Exists(publicKeyFile)) {
-                    rsa.PersistKeyInCsp = false;
                     if (File.Exists(publicKeyFile))
                         File.Delete(publicKeyFile);
                     Console.WriteLine("Eshte larguar celesi publik '" + publicKeyFile + "'");
                 }
                 else if (File.Exists(privateKeyFile)) {
-                    rsa.PersistKeyInCsp = false;
                     if (File.Exists(privateKeyFile))
                         File.Delete(privateKeyFile);
                     Console.WriteLine("Eshte larguar celesi privat '" + privateKeyFile + "'");
@@ -98,8 +92,7 @@ namespace ds
                         }                        
                     }
                   else
-                        Console.WriteLine("Gabim:Celesi publik '"+name+"' nuk ekziston");
-                   
+                        Console.WriteLine("Gabim:Celesi publik '"+name+"' nuk ekziston");                  
                 }
                   else if (public_private.Equals("private"))
                 {
@@ -114,6 +107,8 @@ namespace ds
                     else
                         Console.WriteLine("Gabim:Celesi privat '" + name + "' nuk ekziston");
                 }
+                 else
+                    Console.WriteLine("Specifikoni cilin celes doni ta eksportoni (publik apo privat)!");
             }
         }
              
@@ -121,7 +116,6 @@ namespace ds
         {
             string publicKeyFile = "keys/" + name + ".pub.xml";
             string privateKeyFile = "keys/" + name + ".xml";
-            CspParameters csp = new CspParameters();
             using (var rsa = new RSACryptoServiceProvider((int)KeySizes.SIZE_2048))
             {
                 if (public_private.Equals("public"))
@@ -130,17 +124,21 @@ namespace ds
                     {
                         if (!(File.Exists(publicKeyFile)))
                             File.Create(file);
+                        else if (!file.Contains(".xml") || !file.Contains("."))
+                        {
+                            Console.WriteLine("Nuk keni dhene format te duhur te fajllit!");
+                        }
+                        else{
                         using (StreamReader reader = new StreamReader(publicKeyFile))
                         {
-                            csp.KeyContainerName = file;
                             string filetext = reader.ReadToEnd();
                             using (StreamWriter writer = new StreamWriter(file))
                             {
                                 writer.Write(filetext);
                             }
-                            rsa.PersistKeyInCsp = true;
                             Console.WriteLine("Celesi publik u ruajt ne fajllin '" + file + "'");
                         }
+                      }
                     }
                     else
                         Console.WriteLine("Gabim: Celesi publik '" + name + "' nuk ekziston");
@@ -152,6 +150,11 @@ namespace ds
                     {
                         if (!(File.Exists(privateKeyFile)))
                             File.Create(file);
+                        else if (!file.Contains(".xml") || !file.Contains("."))
+                        {
+                            Console.WriteLine("Nuk keni dhene format te duhur te fajllit!");
+                        }
+                        else{
                         using (StreamReader reader = new StreamReader(privateKeyFile)) {
                             csp.KeyContainerName = file;
                             string filetext = reader.ReadToEnd();
@@ -162,10 +165,13 @@ namespace ds
                             rsa.PersistKeyInCsp = true;
                             Console.WriteLine("Celesi privat u ruajt ne fajllin '" + file + "'");
                         }                    
+                      }
                     }
                     else
                         Console.WriteLine("Gabim:Celesi privat '" + name + "' nuk ekziston");
                 }
+                else
+                    Console.WriteLine("Specifikoni cilin celes doni ta eksportoni (publik apo privat)!");
             }
         } 
         
@@ -173,60 +179,60 @@ namespace ds
         {
             string publicKeyFile = "keys/" + name + ".pub.xml";
             string privateKeyFile = "keys/" + name + ".xml";
-            CspParameters csp = new CspParameters();
-            using (var rsa = new RSACryptoServiceProvider(csp))
-            {
+            RSACryptoServiceProvider objRSA = new RSACryptoServiceProvider();
                 if (File.Exists(path))
                 {
-                    if (!path.Contains(".xml"))
-                    {
-                        Console.WriteLine("Gabim: Fajlli i dhene nuk eshte celes valid.");
+                    if (!path.Contains(".xml") || !path.Contains("."))
+                {
+                    Console.WriteLine("Gabim: Fajlli i dhene nuk eshte celes valid.");
+                }
+                  else{
+                      if (File.Exists(publicKeyFile) || File.Exists(privateKeyFile))
+                    { 
+                        Console.WriteLine("Gabim: Celesi '" + name + "' ekziston paraprakisht.");
                     }
-                    else if (File.Exists(publicKeyFile))
-                        Console.WriteLine("Celesi publik vecse ekziston!");
-                    else
+                    else{
                     using (StreamReader reader = new StreamReader(path))
                     {
-                        csp.KeyContainerName = publicKeyFile;
-
-                        string publicKeyText = reader.ReadToEnd();
-                        if (!Text.Contains("InverseQ"))
+                        string Text = reader.ReadToEnd();
+                        if (!Text.Contains("<InverseQ>"))
                             {
                                 using (StreamWriter writer = new StreamWriter(publicKeyFile))
                                 {
                                     writer.Write(Text);
                                 }
-                        
-                        rsa.PersistKeyInCsp = true;
                         Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'."); 
                          } 
                         }
 
                     using (StreamReader reader = new StreamReader(path))
                     {
-                        csp.KeyContainerName = privateKeyFile;
-
-                        string Text = reader.ReadToEnd(); 
-                        if (Text.Contains("InverseQ"))
-                    {
-                    using (StreamWriter writer = new StreamWriter(publicKeyFile))
-                            {                           
-                               writer.Write("?");
-                             }
-                     using (StreamWriter writer = new StreamWriter(privateKeyFile))
+                          string Text = reader.ReadToEnd();
+                            if (Text.Contains("<InverseQ>"))
                             {
-                                writer.Write(Text);
+                                File.WriteAllText(privateKeyFile, Text);
+                                string strXmlParameters = objRSA.ToXmlString(true);
+                                StreamWriter sw = new StreamWriter(publicKeyFile);
+                                sw.Write(strXmlParameters);
+                                sw.Close();
+                                Console.WriteLine("Celesi privat u ruajt ne fajllin '" + privateKeyFile + "'");
+                                Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'");
                             }
-                            rsa.PersistKeyInCsp = true;
-                               Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'");
-                            Console.WriteLine("Celesi privat u ruajt ne fajllin '" + privateKeyFile + "'");
-                        }
-                    }
+                         }
+                      }
+                   }
                 }
+                
                 else if (path.StartsWith("http://") || path.StartsWith("https://"))
                 {
+                    if (File.Exists(publicKeyFile) || File.Exists(privateKeyFile))
+                    { 
+                      Console.WriteLine("Gabim: Celesi '" + name + "' ekziston paraprakisht.");
+                    }
+
+                    else{
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(path);
-                    request.Method = "Post";
+                    request.Method = "Get";
                     request.KeepAlive = true;
                     request.ContentType = "appication/json";
                     request.Headers.Add("ContentType", "appication/json");
@@ -245,22 +251,27 @@ namespace ds
                          }
                         else if (myResponse.Contains("InverseQ"))
                         {
-                            using (StreamWriter writer = new StreamWriter(privateKeyFile))
+                             using (StreamWriter writer = new StreamWriter(privateKeyFile))
+
                             {
                                 writer.Write(myResponse);
                             }
-                          //  Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'.");
+                            using (StreamWriter writer = new StreamWriter(publicKeyFile))
+                            {
+                                writer.Write(myResponse);
+                            }
                             Console.WriteLine("Celesi privat u ruajt ne fajllin '" + privateKeyFile + "'.");
-                        }
-                    }
-                }
+                            Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'.");
+                      }
+                    }   
+                 }
+              }
                  else if (!File.Exists(path))
                 {
                     Console.WriteLine("Ky fajll nuk ekziston ose keni dhene pathin gabim!");
                 }
             }
-        } 
-        
+       
          public static void encrypt(string name, string message)
         {
             string publicKeyFile = "keys/" + name + ".pub.xml";
@@ -339,13 +350,18 @@ namespace ds
             writer.Flush();
             encryptedText=Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
             string result = test + "." + IV + "." + rsakey + "." + encryptedText;
-            File.WriteAllText(file, result);
-                Console.WriteLine("Mesazhi i enkriptuar u ruajt ne fajllin '"+file+"'.");
-              
+            if (!file.Contains(".txt"))
+                {
+                    Console.WriteLine("Mesazhi i enkriptuar mund te ruhet vetem ne tekst file!");
+                }
+                else
+                {
+                    File.WriteAllText(file, result);
+                    Console.WriteLine("Mesazhi i enkriptuar u ruajt ne fajllin '" + file + "'.");
+                }              
             }
             else
                 Console.WriteLine("Gabim: Celesi publik '" + name + "' nuk ekziston");
-
         }
         public static void decrypt(string encryptedtext)
         {
@@ -354,7 +370,8 @@ namespace ds
             byte[] decEncryptedKey;
             byte[] decEncryptedMsg;
             String emri;
-            
+            try
+            {
              if (encryptedtext.EndsWith(".txt"))
             {
                 using (StreamReader readeri = new StreamReader(encryptedtext))
@@ -417,7 +434,11 @@ namespace ds
             }
               else
                 Console.WriteLine("Gabim: Celesi privat " + privateKeyFile + " nuk ekziston");
-          }
+              }
+            }
+            catch (FormatException e) {
+                Console.WriteLine("Mesazhi qe doni te dekriptoni nuk eshte ne formatin e duhur!"); 
+            }
         }
         public static byte[] RSAdecrypt(byte[] DESKey, string privatei, string emri)
         {
