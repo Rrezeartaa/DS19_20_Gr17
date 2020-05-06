@@ -33,13 +33,12 @@ namespace ds
             {
                 if (!File.Exists(publicKeyFile) && !File.Exists(privateKeyFile))
                 {
-                    rsa.PersistKeyInCsp = false;
                     string publicKey = rsa.ToXmlString(false);
                     File.WriteAllText(publicKeyFile, publicKey);
                     string privateKey = rsa.ToXmlString(true);
                     File.WriteAllText(privateKeyFile, privateKey);
-                    Console.WriteLine("Eshte krijuar celesi privat '" + publicKeyFile + "'");
-                    Console.WriteLine("Eshte krijuar celesi publik '" + privateKeyFile + "'");
+                    Console.WriteLine("Eshte krijuar celesi privat '" + privateKeyFile + "'");
+                    Console.WriteLine("Eshte krijuar celesi publik '" + publicKeyFile + "'");
                 }
                 else
                     Console.WriteLine("Gabim: Celesi '" + name + "' ekziston paraprakisht.");
@@ -152,13 +151,11 @@ namespace ds
                         }
                         else{
                         using (StreamReader reader = new StreamReader(privateKeyFile)) {
-                            csp.KeyContainerName = file;
                             string filetext = reader.ReadToEnd();
                             using (StreamWriter writer = new StreamWriter(file))
                             {
                                 writer.Write(filetext);
                             }
-                            rsa.PersistKeyInCsp = true;
                             Console.WriteLine("Celesi privat u ruajt ne fajllin '" + file + "'");
                         }                    
                       }
