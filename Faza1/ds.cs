@@ -9,6 +9,7 @@ namespace ds
 {
     public static class Cipher
     {
+        private const int ERROR_BAD_ARGUMENTS = 0xA0;
         public static void Main(string[] args)
         {
             if (args.Length < 2|| args.Length > 5)
@@ -111,7 +112,7 @@ namespace ds
                     else
                     {
                         string plaintext = args[3];
-                        railfence1.encrypt(plaintext, int.Parse(args[2]));                       
+                        railfence.encrypt(plaintext, int.Parse(args[2]));                       
                         Console.ReadKey();
                     }
 
@@ -215,7 +216,7 @@ namespace ds
                         "export-key\n"+
                         "write-message\n"+
                         "read-message\n\n");
-                Environment.Exit(2);
+                Environment.ExitCode = ERROR_BAD_ARGUMENTS;
             }
         }
     }
