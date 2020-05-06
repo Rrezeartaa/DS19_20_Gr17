@@ -54,12 +54,11 @@ Udhëzimet për ekzekutimin e programit
 
 Pasi programi është i njëjtë, pra vazhdim i programit nga faza e parë, ekzekutimi bëhet nga Command Prompt duke i dhënë argumentet për komandat përkatëse. Pra, së pari e hapni programin me Command Prompt dhe filloni të shkruani ds dhe pas saj komandën përkatëse, p.sh. ds create-user. Pas komndës përkatëse që ju e jepni, ju duhet të jepni edhe argumentet që i pranon komanda në mënyrë që t'ju funksionojë kompajlimi dhe ekzekutimi i programit. P.sh. ds create-user blerim, argumenti "blerim" dërgohet si parametër tek metoda "create-user" dhe pastaj krijon përdoruesin me po këtë emër (celësi publik dhe privat). Sintaksën se si të thirrni komandat përkatëse i keni më poshtë.
 Nëse jepni argumentet jovalide ju njoftoheni nga programi që nuk i keni dhënë argumentet si duhet ose nëse jepni ndonjë komandë që nuk ekziston gjithashtu do të njoftoheni se ajo komandë nuk ekziston.
-Kur hapet Command Prompt pra së pari shkruhet komanda pastaj argumentet përkatëse që do t'i tregojmë si më poshtë.
 
 Komanda create-user
 
 Kjo komandë gjeneron një cift të celësave (publik dhe privat) të RSA dhe i ruan në një folder përkatës, në rastin tonë në folderin "keys".
-Sintaksa: ds create-user <name>
+Sintaksa: ds create-user "name"
 
 name paraqet emrin me të cilin dëshirojmë të ruajmë ciftin e celësave të gjeneruar. Emri nuk guxon të përmbajë dicka tjetër përpos numrave, shkronjave dhe simbolit _.
 Madhësia e celësit është 2048. Nëse tentojmë të gjenerojmë një celës tjetër me po të njëjtin emër, atëherë programi nuk na lejon sepse ai ekziston paraprakisht.
@@ -67,13 +66,15 @@ Madhësia e celësit është 2048. Nëse tentojmë të gjenerojmë një celës t
 Komanda delete-user
 
 Kjo komandë fshin të gjithë celësat ekzistues të shfrytëzuesit të cilit ne ia shkruajmë emrin. 
-Sintaksa: ds delete-user <name>
+Sintaksa: ds delete-user "name"
 Nëse dëshirojmë të fshijmë përdoruesin i cili nuk ekziston, atëherë na paraqitet një mesazh gabimi.
 
 Komanda export-key
+Komanda export-key në thelb përmban exportimin e celësit privat apo publik të shfrytëzuesit.
 
-Komanda export-key në thelb përmban exportimin e celësit privat apo publik të shfrytëzuesit.Sintaksa për thirrjen e kësaj komande bëhet si në vijim:ds export-key <public|private> <name> [file] 
-  Ku me anë të argumentit <public|private> e përcakton llojin e çelësit që eksportohet.
+Sintaksa për thirrjen e kësaj komande bëhet si në vijim:ds export-key <public|private> <name> [file] 
+ 
+ Me anë të argumentit <public|private> e përcakton llojin e çelësit që eksportohet.
   Me anë të <name> e përcakton çelësin e cilit shfrytëzues të eksportohet.
   Ndërsa, argumenti [file] i cili është opcional e përcakton shtegun e fajllit se ku do të ruhet çelësi i eksportuar. Nëse
 mungon argumenti atëherë çelësi do të shfaqet në console.Varësisht cilin lloj të celësit e kemi kërkuara, atë privat apo publik shfaqet në ekran.
@@ -81,33 +82,50 @@ mungon argumenti atëherë çelësi do të shfaqet në console.Varësisht cilin 
   
 Komanda import-key
 
-Kjo komandë ka për qëllim të importojë celësin publik ose privat të shfrytëzuesit nga shtegu që kemi dhënë pra shtegut <path> dhe i vëndos ata në folderin "keys" në këtë rast.
+Kjo komandë ka për qëllim të importojë celësin publik ose privat të shfrytëzuesit nga shtegu që kemi dhënë pra path dhe i vëndos ata në folderin "keys" në këtë rast.
+
 Sintaksa: ds import-key "name" "path"
-"name" e përcakton emrin e çelësit që do të ruhet në folderin keys.
+
+"name" e përcakton emrin e çelësit që do të ruhet në direktoriumin keys.
+
 "path" e përcakton shtegun e çelësit që do të importohet.
+
 Argumenti "name" e përcakton emrin e çelësit që do të ruhet në direktoriumin keys.
+
 Argumenti "path" e përcakton shtegun e çelësit që do të importohet.
-Celësi mundët më qenë publik ose privat dhe kemi mundesuar qe programi automatikisht të kupton se qfarë lloj i celësit është duke e shikuar përmbajtjen e fajllit që importohet.Nëse celësi që importohet  është privat automatikisht gjenërohet edhe celësi publik në mënyrë që të dytë të ruhën në "keys".
+
+Celësi mundet me qenë publik ose privat dhe kemi mundesuar qe programi automatikisht të kuptojë se qfarë lloj i celësit është duke e shikuar përmbajtjen e fajllit që importohet.Nëse celësi që importohet është privat automatikisht gjenerohet edhe celësi publik në menyrë që të dytë te ruhen në "keys".
+
 Nëse  "path" fillon me http:// ose https://, atëherë dërgohet një GET request në
 URL "path" dhe merret trupi i përgjigjes si vlera e çelësit.  
 
 Komanda write-message
 
-E shkruan një mesazh të enkriptuar të dedikuar për një shfrytëzues.
+E enkripton mesazhin e dhënë sipas skemës në rreshtin e fundit.
+
 Sintaksa: ds write-message "name" "message" [file].
+
 Argumenti "name" e paraqet marrësin e mesazhit (çelësin publik).
+
 Argumenti "message" e paraqet mesazhin që do të enkriptohet.
+
 Argumenti opsional [file] e përcakton shtegun e fajllit se ku do të ruhet mesazhi i enkriptuar. Nëse
 mungon argumenti, atëherë mesazhi i enkriptuar do të shfaqet në console.
+
 Enkriptimi bëhet sipas skemës në vijim:
 ciphertext = base64(utf8("name")) . base64("iv"). base64(rsa("key")) . base64(des("message"))
   
-Komanda read-message 
-
-E dekripton dhe e shfaq në console mesazhin e enkriptuar.
-Sintaksa: ds read-message <encrypted-message>
-Argumenti <encrypted-message> paraqet mesazhin e enkriptuar sipas skemës së komandës write-message.
-Për lehtësim thirrje të tekstit të enkriptuar ,përdoret edhe thirrja e path të fajllit në të cilin është ruajtur paraprakisht .
-Gjithashtu dihet që për dekriptim te mesazhit të enkriptuar na nevoitet qelësi privat i shfrytëzuesit.
-Në qoftëse nuk egziston qelësi privat atër shfaqet mesazhi që tregon që një qelsëi i till mungonë. 
   
+Komanda read-message
+
+Kjo komandë dekripton mesazhin e enkriptuar me komandën write-message.
+
+Sintaksa: ds read-message "encryptedmessage"
+  
+Argumenti"encrypted-message" paraqet mesazhin që enkriptohet sipas skemës së komandës write-message. Nëse ky argument nuk përputhet me skemën e enkriptimit atëherë mesazhi lexohet nga fajlli në të cilin gjendet.
+
+Emri i shfrytëzuesit dhe çelësit dekodohet nga mesazhi që ne e japim.
+Nëse mesazhi që jepet nga shfrytëzuesi nuk e ka strukturën që mund të dekriptohet, atëherë jepet një mesazh gabimi.
+
+
+Për të gjitha komandat në rast se shfrytëzuesi jep argumente të gabuara i paraqiten mesazhe gabimi. Këto mund t'i shihni ne folderin ShembujEkzekutimi ku edhe ndodhet folderi me shembujt për fazën e dytë.
