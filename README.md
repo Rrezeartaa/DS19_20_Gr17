@@ -70,6 +70,7 @@ Sintaksa: ds delete-user "name"
 Nëse dëshirojmë të fshijmë përdoruesin i cili nuk ekziston, atëherë na paraqitet një mesazh gabimi.
 
 Komanda export-key
+
 Komanda export-key në thelb përmban exportimin e celësit privat apo publik të shfrytëzuesit.
 
 Sintaksa për thirrjen e kësaj komande bëhet si në vijim:ds export-key <public|private> <name> [file] 
@@ -129,3 +130,6 @@ Nëse mesazhi që jepet nga shfrytëzuesi nuk e ka strukturën që mund të dekr
 
 
 Për të gjitha komandat në rast se shfrytëzuesi jep argumente të gabuara i paraqiten mesazhe gabimi. Këto mund t'i shihni ne folderin ShembujEkzekutimi ku edhe ndodhet folderi me shembujt për fazën e dytë.
+
+Për këtë projekt jemi bazuar nga ushtrimet, videot ne YouTube dhe nga libra të ndryshëm.
+
