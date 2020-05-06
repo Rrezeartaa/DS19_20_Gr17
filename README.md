@@ -71,6 +71,7 @@ Sintaksa: ds delete-user <name>
 Nëse dëshirojmë të fshijmë përdoruesin i cili nuk ekziston, atëherë na paraqitet një mesazh gabimi.
 
 Komanda export-key
+
 Komanda export-key në thelb përmban exportimin e celësit privat apo publik të shfrytëzuesit.Sintaksa për thirrjen e kësaj komande bëhet si në vijim:ds export-key <public|private> <name> [file] 
   Ku me anë të argumentit <public|private> e përcakton llojin e çelësit që eksportohet.
   Me anë të <name> e përcakton çelësin e cilit shfrytëzues të eksportohet.
@@ -101,4 +102,11 @@ mungon argumenti, atëherë mesazhi i enkriptuar do të shfaqet në console.
 Enkriptimi bëhet sipas skemës në vijim:
 ciphertext = base64(utf8("name")) . base64("iv"). base64(rsa("key")) . base64(des("message"))
   
+Komanda read-message 
+E dekripton dhe e shfaq në console mesazhin e enkriptuar.
+Sintaksa: ds read-message <encrypted-message>
+Argumenti <encrypted-message> paraqet mesazhin e enkriptuar sipas skemës së komandës write-message.
+Për lehtësim thirrje të tekstit të enkriptuar ,përdoret edhe thirrja e path të fajllit në të cilin është ruajtur paraprakisht .
+Gjithashtu dihet që për dekriptim te mesazhit të enkriptuar na nevoitet qelësi privat i shfrytëzuesit.
+Në qoftëse nuk egziston qelësi privat atër shfaqet mesazhi që tregon që një qelsëi i till mungonë. 
   
