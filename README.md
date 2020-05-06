@@ -50,6 +50,8 @@ Shembujt e ekzekutimit i gjeni tek folderi me emrin Shembuj Ekzekutimi.
 
 Faza e dytë
 
+Programi kryesor është në folderin e fazës së parë, ndërsa komandat janë në një folder tjetër.
+
 Udhëzimet për ekzekutimin e programit
 
 Pasi programi është i njëjtë, pra vazhdim i programit nga faza e parë, ekzekutimi bëhet nga Command Prompt duke i dhënë argumentet për komandat përkatëse. Pra, së pari e hapni programin me Command Prompt dhe filloni të shkruani ds dhe pas saj komandën përkatëse, p.sh. ds create-user. Pas komndës përkatëse që ju e jepni, ju duhet të jepni edhe argumentet që i pranon komanda në mënyrë që t'ju funksionojë kompajlimi dhe ekzekutimi i programit. P.sh. ds create-user blerim, argumenti "blerim" dërgohet si parametër tek metoda "create-user" dhe pastaj krijon përdoruesin me po këtë emër (celësi publik dhe privat). Sintaksën se si të thirrni komandat përkatëse i keni më poshtë.
