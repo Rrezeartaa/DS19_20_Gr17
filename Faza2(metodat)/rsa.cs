@@ -175,7 +175,7 @@ namespace ds
         {
             string publicKeyFile = "keys/" + name + ".pub.xml";
             string privateKeyFile = "keys/" + name + ".xml";
-            RSACryptoServiceProvider objRSA = new RSACryptoServiceProvider();
+            RSACryptoServiceProvider obj = new RSACryptoServiceProvider();
                 if (File.Exists(path))
                 {
                     if (!path.Contains(".xml") || !path.Contains("."))
@@ -207,9 +207,9 @@ namespace ds
                             if (Text.Contains("<InverseQ>"))
                             {
                                 File.WriteAllText(privateKeyFile, Text);
-                                string strXmlParameters = objRSA.ToXmlString(false);
+                                string param = obj.ToXmlString(false);
                                 StreamWriter sw = new StreamWriter(publicKeyFile);
-                                sw.Write(strXmlParameters);
+                                sw.Write(param);
                                 sw.Close();
                                 Console.WriteLine("Celesi privat u ruajt ne fajllin '" + privateKeyFile + "'");
                                 Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'");
@@ -247,16 +247,13 @@ namespace ds
                          }
                         else if (myResponse.Contains("<InverseQ>"))
                         {
-                             using (StreamWriter writer = new StreamWriter(privateKeyFile))
-                            {
-                                writer.Write(myResponse);
-                            }
-                            using (StreamWriter writer = new StreamWriter(publicKeyFile))
-                            {
-                                writer.Write(myResponse);
-                            }
-                            Console.WriteLine("Celesi privat u ruajt ne fajllin '" + privateKeyFile + "'.");
-                            Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'.");
+                            File.WriteAllText(privateKeyFile, myResponse);
+                            string param = obj.ToXmlString(false);
+                            StreamWriter sw = new StreamWriter(publicKeyFile);
+                            sw.Write(param);
+                            sw.Close();
+                            Console.WriteLine("Celesi privat u ruajt ne fajllin " + privateKeyFile);
+                            Console.WriteLine("Celesi publik u ruajt ne fajllin " + publicKeyFile);
                       }
                         else
                             Console.WriteLine("Linku i dhene nuk permban ndonje celes publik apo privat!");
