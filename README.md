@@ -103,6 +103,7 @@ Enkriptimi bëhet sipas skemës në vijim:
 ciphertext = base64(utf8("name")) . base64("iv"). base64(rsa("key")) . base64(des("message"))
   
 Komanda read-message 
+
 E dekripton dhe e shfaq në console mesazhin e enkriptuar.
 Sintaksa: ds read-message <encrypted-message>
 Argumenti <encrypted-message> paraqet mesazhin e enkriptuar sipas skemës së komandës write-message.
