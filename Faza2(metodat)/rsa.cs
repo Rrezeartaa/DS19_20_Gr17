@@ -54,20 +54,16 @@ namespace ds
             {
                 if (File.Exists(publicKeyFile) && File.Exists(privateKeyFile))
                 {
-                    if (File.Exists(privateKeyFile))
                         File.Delete(privateKeyFile);
-                    if (File.Exists(publicKeyFile))
                         File.Delete(publicKeyFile);
                     Console.WriteLine("Eshte larguar celesi privat '" + privateKeyFile + "'");
                     Console.WriteLine("Eshte larguar celesi publik '" + publicKeyFile + "'");
                 }
                 else if (File.Exists(publicKeyFile)) {
-                    if (File.Exists(publicKeyFile))
                         File.Delete(publicKeyFile);
                     Console.WriteLine("Eshte larguar celesi publik '" + publicKeyFile + "'");
                 }
                 else if (File.Exists(privateKeyFile)) {
-                    if (File.Exists(privateKeyFile))
                         File.Delete(privateKeyFile);
                     Console.WriteLine("Eshte larguar celesi privat '" + privateKeyFile + "'");
                 }
@@ -211,7 +207,7 @@ namespace ds
                             if (Text.Contains("<InverseQ>"))
                             {
                                 File.WriteAllText(privateKeyFile, Text);
-                                string strXmlParameters = objRSA.ToXmlString(true);
+                                string strXmlParameters = objRSA.ToXmlString(false);
                                 StreamWriter sw = new StreamWriter(publicKeyFile);
                                 sw.Write(strXmlParameters);
                                 sw.Close();
@@ -241,7 +237,7 @@ namespace ds
                     using (System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream()))
                     {
                         myResponse = sr.ReadToEnd();
-                        if (!myResponse.Contains("InverseQ"))
+                        if (!myResponse.Contains("<InverseQ>")&& myResponse.Contains("Modulus"))
                         {
                             using (StreamWriter writer = new StreamWriter(publicKeyFile))
                             {
@@ -249,10 +245,9 @@ namespace ds
                             }
                             Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'.");
                          }
-                        else if (myResponse.Contains("InverseQ"))
+                        else if (myResponse.Contains("<InverseQ>"))
                         {
                              using (StreamWriter writer = new StreamWriter(privateKeyFile))
-
                             {
                                 writer.Write(myResponse);
                             }
@@ -263,6 +258,8 @@ namespace ds
                             Console.WriteLine("Celesi privat u ruajt ne fajllin '" + privateKeyFile + "'.");
                             Console.WriteLine("Celesi publik u ruajt ne fajllin '" + publicKeyFile + "'.");
                       }
+                        else
+                            Console.WriteLine("Linku i dhene nuk permban ndonje celes publik apo privat!");
                     }   
                  }
               }
@@ -374,6 +371,11 @@ namespace ds
             {
              if (encryptedtext.EndsWith(".txt"))
             {
+                 if (!File.Exists(encryptedtext))
+                    {
+                        Console.WriteLine("Ky fajll nuk ekziston!");
+                    }
+                 else{
                 using (StreamReader readeri = new StreamReader(encryptedtext))
                 {
                     string Texti = readeri.ReadToEnd();
@@ -404,6 +406,7 @@ namespace ds
                     else
                         Console.WriteLine("Gabim: Celesi privat " + privateKeyFile + " nuk ekziston");
                 }
+              }
             }
             else if (!encryptedtext.Contains(".txt"))
             {
