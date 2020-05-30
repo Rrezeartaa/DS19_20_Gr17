@@ -27,18 +27,38 @@ namespace ds
         };
         public static void GenKey(string name)
         {
+            string strRegexi = @"^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}$";
+            Regex ree = new Regex(strRegexi);
+            Console.WriteLine("Jepni fjalekalimin:");
+            string password;
+            password= Console.ReadLine();
+            Console.WriteLine("Perserit fjalekalimin:");
+            string confpassword = Console.ReadLine();
+            
             string publicKeyFile = "keys/" + name + ".pub.xml";
             string privateKeyFile= "keys/" + name + ".xml";
             using (var rsa = new RSACryptoServiceProvider((int)KeySizes.SIZE_2048))
             {
                 if (!File.Exists(publicKeyFile) && !File.Exists(privateKeyFile))
                 {
+                     if (password != confpassword)
+                    {
+                        Console.WriteLine("Fjalekalimet nuk perputhen!");
+                    }
+                    else if(!ree.IsMatch(password))
+                    {
+                        Console.WriteLine("Gabim: Fjalekalimi duhet te permbaje se paku nje numer ose simbol.");
+                    }
+                    else
+                    {
                     string publicKey = rsa.ToXmlString(false);
                     File.WriteAllText(publicKeyFile, publicKey);
                     string privateKey = rsa.ToXmlString(true);
                     File.WriteAllText(privateKeyFile, privateKey);
+                    Console.WriteLine("Eshte krijuar shfrytezuesi '" + name + "'");
                     Console.WriteLine("Eshte krijuar celesi privat '" + privateKeyFile + "'");
                     Console.WriteLine("Eshte krijuar celesi publik '" + publicKeyFile + "'");
+                   }
                 }
                 else
                     Console.WriteLine("Gabim: Celesi '" + name + "' ekziston paraprakisht.");
