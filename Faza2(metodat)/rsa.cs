@@ -136,8 +136,28 @@ namespace ds
             {
                 if (File.Exists(publicKeyFile) && File.Exists(privateKeyFile))
                 {
-                        File.Delete(privateKeyFile);
-                        File.Delete(publicKeyFile);
+                     File.Delete(privateKeyFile);
+                     File.Delete(publicKeyFile);
+                    string ConnectionString = @"Data Source=RREZEARTA-DESKT\SQLEXPRESS;Initial Catalog=celesat;Integrated Security=True;Pooling=False";
+                    SqlConnection objConn = new SqlConnection(ConnectionString);
+                    string command = "Delete from celesi where emri='"+name+"'";
+                    SqlCommand objCommand = new SqlCommand(command, objConn);
+                    try
+                    {
+                        objConn.Open();
+                        int AffectedRows = objCommand.ExecuteNonQuery();
+                        if (AffectedRows == 1)
+                            Console.WriteLine("Eshte larguar shfrytezuesi '" + name + "'");
+                        else
+                            Console.WriteLine("Nuk eshte larguar shfrytezuesi '" + name + "'");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Ka ndodhur nje gabim: " + ex.Message);
+                        objConn.Close();
+
+                    }
                     Console.WriteLine("Eshte larguar celesi privat '" + privateKeyFile + "'");
                     Console.WriteLine("Eshte larguar celesi publik '" + publicKeyFile + "'");
                 }
