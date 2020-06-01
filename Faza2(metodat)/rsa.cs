@@ -12,6 +12,7 @@ using System.Security.Policy;
 using System.Net;
 using System.Security.Cryptography.Xml;
 using System.Numerics;
+using System.Data.SqlClient;
 namespace ds
 {
     class rsa
@@ -55,7 +56,26 @@ namespace ds
                     File.WriteAllText(publicKeyFile, publicKey);
                     string privateKey = rsa.ToXmlString(true);
                     File.WriteAllText(privateKeyFile, privateKey);
-                    Console.WriteLine("Eshte krijuar shfrytezuesi '" + name + "'");
+                    string ConnectionString = @"Data Source=RREZEARTA-DESKT\SQLEXPRESS;Initial Catalog=celesat;Integrated Security=True;Pooling=False"; 
+                     SqlConnection objConn = new SqlConnection(ConnectionString);
+                     string command ="Insert into celesi (emri,password) values('"+name+"','"+password+"')";
+                     SqlCommand objCommand = new SqlCommand(command, objConn);
+                     try
+                      {
+                          objConn.Open();
+                          int AffectedRows = objCommand.ExecuteNonQuery();
+                          if (AffectedRows == 1)
+                              Console.WriteLine("Eshte krijuar shfrytezuesi '" + name + "'");
+                          else
+                              Console.WriteLine("Nuk eshte krijuar shfrytezuesi '" + name + "'");
+
+                       }
+                      catch (Exception ex)
+                       {
+                          Console.WriteLine("Ka ndodhur nje gabim: " + ex.Message);
+                          objConn.Close();
+                            
+                       }
                     Console.WriteLine("Eshte krijuar celesi privat '" + privateKeyFile + "'");
                     Console.WriteLine("Eshte krijuar celesi publik '" + publicKeyFile + "'");
                    }
