@@ -135,3 +135,16 @@ Për të gjitha komandat në rast se shfrytëzuesi jep argumente të gabuara i p
 
 Për këtë projekt jemi bazuar nga ushtrimet, videot ne YouTube dhe nga libra të ndryshëm.
 
+
+Faza e tretë
+
+Udhëzimet për ekzekutimin e programit:
+Faza e tretë është zgjerim i fazës së dytë. Mënyra e ekzekutimit është e ngjashme. Të gjitha që janë përmendur në ekzekutimin e programit në fazën e dytë vlejnë edhe për fazën e tretë.
+
+Detajet e implementimit:
+
+Skema e ruajtjes së fjalëkalimeve: Fjalëkalimet janë ruajtur me salted hash.
+
+Mënyra e ruajtjes së shënimeve: Të dhënat e user-it (emri dhe fjalëkalimi) janë ruajtur në një bazë të dhënash (DBMS).
+
+Struktura e tokenëve të lëshuar:
