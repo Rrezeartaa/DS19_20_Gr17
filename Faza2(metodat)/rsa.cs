@@ -99,6 +99,12 @@ namespace ds
                     File.WriteAllText(publicKeyFile, publicKey);
                     string privateKey = rsa.ToXmlString(true);
                     File.WriteAllText(privateKeyFile, privateKey);
+                    SHA1CryptoServiceProvider objHash = new SHA1CryptoServiceProvider();
+                    int RandomSalt = new Random().Next(100000, 1000000);
+                    string saltpassword = RandomSalt + password;
+                    byte[] byteSaltPassword = Encoding.UTF8.GetBytes(saltpassword);
+                    byte[] byteHashSaltedPassword = objHash.ComputeHash(byteSaltPassword);
+                    password = Convert.ToBase64String(byteHashSaltedPassword);
                     string ConnectionString = @"Data Source=RREZEARTA-DESKT\SQLEXPRESS;Initial Catalog=celesat;Integrated Security=True;Pooling=False"; 
                      SqlConnection objConn = new SqlConnection(ConnectionString);
                      string command ="Insert into celesi (emri,password) values('"+name+"','"+password+"')";
