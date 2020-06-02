@@ -148,3 +148,15 @@ Skema e ruajtjes së fjalëkalimeve: Fjalëkalimet janë ruajtur me salted hash.
 Mënyra e ruajtjes së shënimeve: Të dhënat e user-it (emri dhe fjalëkalimi) janë ruajtur në një bazë të dhënash (DBMS).
 
 Struktura e tokenëve të lëshuar:
+
+
+
+Komanda Login:
+Kjo komand në hyrje merr te dhënat e user-it emrin dhe fjalkalimin e tij.Në rast përputhje të të dhënave dhe në rast të egzekutimit të suksesshën lëshohet një token i nënshkruar i cili përdoret për autentikim të shfrytëzuesit.
+
+Mënyra e ruajtjes së tokenit është sipas dëshirës, psh. ne mund ta lëshoni një JWT, një XML të
+nënshkruar, ose ndonjë format të vet-definuar.
+Pë nënshkrimin e tokenit është përdorur çelësi privat i shfrytëzuesit, ndërsa për vërtetim të nënshkrimit është përdorur çelësi publik i shfrytëzuesit. 
+Tokeni skadon pas 20 minutave dhe ai mund të përdoret vetëm për shfrytëzuesin për të cilin është
+lëshuar.
+
