@@ -160,3 +160,13 @@ Pë nënshkrimin e tokenit është përdorur çelësi privat i shfrytëzuesit, n
 Tokeni skadon pas 20 minutave dhe ai mund të përdoret vetëm për shfrytëzuesin për të cilin është
 lëshuar.
 
+Komanda Status:
+
+Sintaksa per kete komande eshte : ds status <token>
+$ ds status dG9rZW5pIGkgbmVuc2hrcnVhci4u...
+User: edon
+Valid: po
+Skadimi: 21/05/2020 17:23
+Eshte mundesuarne qofte se  tokeni ka skaduar, nese nuk ka nënshkrim valid, ose nuk ekziston shfrytëzuesi, atëherë tokeni nuk
+konsiderohet valid.
+
