@@ -93,6 +93,24 @@ var tokenDescriptor = new SecurityTokenDescriptor
     SigningCredentials = new SigningCredentials(symKey,
         SecurityAlgorithms.HmacSha256Signature)
 };
+                    var stoken = tokenHandler.CreateToken(tokenDescriptor);
+var token = tokenHandler.WriteToken(stoken);
+
+
+Console.WriteLine("Token:" + token); 
+                     
+                   
+                }
+
+                else if (!encodedHash.Equals(hash))
+                    Console.WriteLine("Gabim:Shfrytezuesi ose fjalekalimi i gabuar.");
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ka ndodhur nje gabim: " + ex.Message);
+                objConn.Close(); 
+    }
                 
 
         
