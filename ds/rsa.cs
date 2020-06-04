@@ -13,6 +13,10 @@ using System.Net;
 using System.Security.Cryptography.Xml;
 using System.Numerics;
 using System.Data.SqlClient;
+using Org.BouncyCastle.Security;
+using java.security;
+using System.Buffers.Text;
+
 namespace ds
 {
     class rsa
@@ -99,15 +103,18 @@ namespace ds
                     File.WriteAllText(publicKeyFile, publicKey);
                     string privateKey = rsa.ToXmlString(true);
                     File.WriteAllText(privateKeyFile, privateKey);
-                    SHA1CryptoServiceProvider objHash = new SHA1CryptoServiceProvider();
-                    int RandomSalt = new Random().Next(100000, 1000000);
-                    string saltpassword = RandomSalt + password;
-                    byte[] byteSaltPassword = Encoding.UTF8.GetBytes(saltpassword);
-                    byte[] byteHashSaltedPassword = objHash.ComputeHash(byteSaltPassword);
-                    password = Convert.ToBase64String(byteHashSaltedPassword);
+                    Org.BouncyCastle.Security.SecureRandom secure = new Org.BouncyCastle.Security.SecureRandom();
+                    byte[] salt = new byte[24];
+                    secure.NextBytes(salt);
+                    String salt_encoded = System.Convert.ToBase64String(salt);
+
+                    MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
+                    messageDigest.update(Encoding.UTF8.GetBytes(salt_encoded));
+                    byte[] bytes = messageDigest.digest(Encoding.UTF8.GetBytes(password));
+                    String encodedHash = System.Convert.ToBase64String(bytes);
                     string ConnectionString = @"Data Source=RREZEARTA-DESKT\SQLEXPRESS;Initial Catalog=celesat;Integrated Security=True;Pooling=False"; 
                      SqlConnection objConn = new SqlConnection(ConnectionString);
-                     string command ="Insert into celesi (emri,password) values('"+name+"','"+password+"')";
+                     string command = "Insert into celesi (emri,salt,encodedhash) values('" + name+ "','" + salt_encoded + "','" + encodedHash + "')";
                      SqlCommand objCommand = new SqlCommand(command, objConn);
                      try
                       {
