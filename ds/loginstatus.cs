@@ -18,7 +18,31 @@ namespace ds
     {
         public static void loginGenerateToken(string name)
         {
-        
+                   Console.WriteLine("Jepni fjalekalimin:");
+            string password = "";
+            do
+            {
+                ConsoleKeyInfo keyy = Console.ReadKey(true);
+                // Backspace Should Not Work
+                if (keyy.Key != ConsoleKey.Backspace && keyy.Key != ConsoleKey.Enter)
+                {
+                    password += keyy.KeyChar;
+                    Console.Write("*");
+                }
+                else
+                {
+                    if (keyy.Key == ConsoleKey.Backspace && password.Length > 0)
+                    {
+                        password = password.Substring(0, (password.Length - 1));
+                        Console.Write("\b \b");
+                    }
+                    else if (keyy.Key == ConsoleKey.Enter)
+                    {
+                        break;
+                    }
+                }
+            } while (true);
+            Console.WriteLine();
         
         }
      }
