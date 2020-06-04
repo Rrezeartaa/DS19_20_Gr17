@@ -205,6 +205,10 @@ namespace ds
                 else
                     Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");             
             }
+            else if ("login".Equals(args[0]))
+            {
+                loginstatus.loginGenerateToken(args[1]);
+            }
             else
             {
                 Console.WriteLine("\nArgumentet jane jovalide. Argumenti i pare eshte njeri prej funksioneve tona: \n" +
