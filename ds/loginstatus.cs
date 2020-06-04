@@ -18,12 +18,11 @@ namespace ds
     {
         public static void loginGenerateToken(string name)
         {
-                   Console.WriteLine("Jepni fjalekalimin:");
+            Console.WriteLine("Jepni fjalekalimin:");
             string password = "";
             do
             {
                 ConsoleKeyInfo keyy = Console.ReadKey(true);
-                // Backspace Should Not Work
                 if (keyy.Key != ConsoleKey.Backspace && keyy.Key != ConsoleKey.Enter)
                 {
                     password += keyy.KeyChar;
@@ -72,48 +71,40 @@ namespace ds
                 if (encodedHash.Equals(hash))
                 {
                     string privatekey = "";
-string key = "keys/" + name + ".xml";
+                    string key = "keys/" + name + ".xml";
                     using (StreamReader reader = new StreamReader(key))
                     {
                          privatekey = reader.ReadToEnd();
                     }
                         var symKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(privatekey));
-int expireMinutes = 20;
-var tokenHandler = new JwtSecurityTokenHandler();
-var now = DateTime.UtcNow;
-var tokenDescriptor = new SecurityTokenDescriptor
-{
-    Subject = new ClaimsIdentity(new[]
-    {
-                            new Claim(ClaimTypes.Name, name),
+                    int expireMinutes = 20;
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var now = DateTime.UtcNow;
+                    var tokenDescriptor = new SecurityTokenDescriptor
+                   {
+                      Subject = new ClaimsIdentity(new[]
+                   {
+                       new Claim(ClaimTypes.Name, name),
 
-                        }),
-    Expires = now.AddMinutes(Convert.ToInt32(expireMinutes)),
+                     }),
+                   Expires = now.AddMinutes(Convert.ToInt32(expireMinutes)),
 
-    SigningCredentials = new SigningCredentials(symKey,
-        SecurityAlgorithms.HmacSha256Signature)
-};
+                   SigningCredentials = new SigningCredentials(symKey,
+                                                              SecurityAlgorithms.HmacSha256Signature)
+                    };
                     var stoken = tokenHandler.CreateToken(tokenDescriptor);
-var token = tokenHandler.WriteToken(stoken);
-
-
-Console.WriteLine("Token:" + token); 
-                     
-                   
+                    var token = tokenHandler.WriteToken(stoken);
+                    Console.WriteLine("Token:" + token);  
                 }
-
                 else if (!encodedHash.Equals(hash))
-                    Console.WriteLine("Gabim:Shfrytezuesi ose fjalekalimi i gabuar.");
-                
+                    Console.WriteLine("Gabim:Shfrytezuesi ose fjalekalimi i gabuar.");               
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Ka ndodhur nje gabim: " + ex.Message);
                 objConn.Close(); 
-    }
+         }
                 
-
-        
         }
      }
  }
