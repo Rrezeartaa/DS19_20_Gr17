@@ -65,8 +65,38 @@ namespace ds
                 }
                  
                     MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
+                    messageDigest.update(Encoding.UTF8.GetBytes(salt_encoded));
+                    byte[] bytes = messageDigest.digest(Encoding.UTF8.GetBytes(password));
+                    String encodedHash = System.Convert.ToBase64String(bytes);
+
+                if (encodedHash.Equals(hash))
+                {
+                    string privatekey = "";
+string key = "keys/" + name + ".xml";
+                    using (StreamReader reader = new StreamReader(key))
+                    {
+                         privatekey = reader.ReadToEnd();
+                    }
+                        var symKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(privatekey));
+int expireMinutes = 20;
+var tokenHandler = new JwtSecurityTokenHandler();
+var now = DateTime.UtcNow;
+var tokenDescriptor = new SecurityTokenDescriptor
+{
+    Subject = new ClaimsIdentity(new[]
+    {
+                            new Claim(ClaimTypes.Name, name),
+
+                        }),
+    Expires = now.AddMinutes(Convert.ToInt32(expireMinutes)),
+
+    SigningCredentials = new SigningCredentials(symKey,
+        SecurityAlgorithms.HmacSha256Signature)
+};
+                
 
         
         }
      }
  }
+ 
