@@ -209,6 +209,9 @@ namespace ds
             {
                 loginstatus.loginGenerateToken(args[1]);
             }
+            else if ("status".Equals(args[0])){
+                loginstatus.statusToken(args[1]);
+            }
             else
             {
                 Console.WriteLine("\nArgumentet jane jovalide. Argumenti i pare eshte njeri prej funksioneve tona: \n" +
