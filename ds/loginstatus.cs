@@ -108,6 +108,18 @@ namespace ds
         }
         public static void statusToken(string token)
 {
+             string publickey = "";
+    //string name = "";
+    string key = "keys/haliti.pub.xml";
+    using (StreamReader reader = new StreamReader(key))
+    {
+        publickey = reader.ReadToEnd();
+    }
+    string[] tokenParts = token.Split('.');
+    String unsignedToken = token[0] + "." + token[1] + ".";
+    RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+    rsa.ImportParameters(
+      new RSAParameters()
 
      }
  }
