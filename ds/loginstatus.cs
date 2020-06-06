@@ -12,10 +12,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Data;
 using System.Security.Cryptography;
+using System.Xml;
+using Newtonsoft.Json;
+using System.Configuration;
 namespace ds
 {
     class loginstatus
     {
+        private const string _company = "Shembull";
         public static void loginGenerateToken(string name)
         {
             Console.WriteLine("Jepni fjalekalimin:");
@@ -70,31 +74,34 @@ namespace ds
 
                 if (encodedHash.Equals(hash))
                 {
-                    string privatekey = "";
+                    RsaSecurityKey privateKeyi;
+                    RSA privateRsa = RSA.Create();                        
+                    string privatekke = "";
                     string key = "keys/" + name + ".xml";
                     using (StreamReader reader = new StreamReader(key))
                     {
-                         privatekey = reader.ReadToEnd();
+                      privatekke = reader.ReadToEnd();
                     }
-                        var symKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(privatekey));
-                    int expireMinutes = 20;
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var now = DateTime.UtcNow;
-                    var tokenDescriptor = new SecurityTokenDescriptor
-                   {
-                      Subject = new ClaimsIdentity(new[]
-                   {
-                       new Claim(ClaimTypes.Name, name),
+                   privateRsa.FromXML(privatekke);
+                   privateKeyi = new RsaSecurityKey(privateRsa);
+                   var credentials = new SigningCredentials(privateKeyi, SecurityAlgorithms.RsaSha256);
 
-                     }),
-                   Expires = now.AddMinutes(Convert.ToInt32(expireMinutes)),
+                        var header = new JwtHeader(credentials);
+                        var payload = new JwtPayload(
+                            name,
+                            _company,
+                            new List<Claim>()
+                            {
+                             new Claim("sub", name)
+                            },
+                            DateTime.UtcNow,
+                            DateTime.UtcNow.AddMinutes(20));
 
-                   SigningCredentials = new SigningCredentials(symKey,
-                                                              SecurityAlgorithms.HmacSha256Signature)
-                    };
-                    var stoken = tokenHandler.CreateToken(tokenDescriptor);
-                    var token = tokenHandler.WriteToken(stoken);
-                    Console.WriteLine("Token:" + token);  
+                        var secToken = new JwtSecurityToken(header, payload);
+                         var handler = new JwtSecurityTokenHandler();
+                        var tokenString = handler.WriteToken(secToken);
+                    
+                    Console.WriteLine(tokenString);
                 }
                 else if (!encodedHash.Equals(hash))
                     Console.WriteLine("Gabim:Shfrytezuesi ose fjalekalimi i gabuar.");               
