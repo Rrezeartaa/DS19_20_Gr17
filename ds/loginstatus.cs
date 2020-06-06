@@ -113,34 +113,63 @@ namespace ds
          }
                 
         }
-        public static void statusToken(string token)
-{
-             string publickey = "";
-    //string name = "";
-    string key = "keys/haliti.pub.xml";
-    using (StreamReader reader = new StreamReader(key))
-    {
-        publickey = reader.ReadToEnd();
-    }
-    string[] tokenParts = token.Split('.');
-    String unsignedToken = token[0] + "." + token[1] + ".";
-    RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-    rsa.ImportParameters(
-      new RSAParameters()
-                      {
-                  Modulus = Encoding.ASCII.GetBytes("0WG3GMAH0nRTHKgSnrAjNNuBLxxikLG0XyY73OfuHn6JcRuRUyh1MvS0Y5BxX9FcC32l6Er8UcHOLX/WraNZclBexF1TnuUarRB82alkB0UMxBrtP+qgfOrsUek/orpDwdXkANW6oGB0aTZ5tdC7r/MI7nbCCwcQU7tQ2BtIdVHb/Q9QfFMtMO5sbf5y8GhvvcyNbJ6Mb0pyeFGZNoC2ISLqQmGxzNJmFSofbUusq3P5VmzjFprvfoPcklCmTi8rthR69lrWlc/RDWAhJPOodZqBVu3keV0UPD1hxY4mFDj8NvSvKo+/Yq1FCX/xrO0Of/lBDlhtY8rJebeRxDcCpQ=="),
-                  Exponent = Encoding.ASCII.GetBytes("AQAB")
-              });
-            SHA256 sha256 = SHA256.Create();
-            byte[] hash = sha256.ComputeHash(Encoding.UTF8.GetBytes(tokenParts[0] + '.' + tokenParts[1]));
+        public static void statusToken(string tokeni)
+        {
+             string[] tokenArr = tokeni.Split('.');
+            //string pay = tokenArr[1];
+            byte[] decpay= System.Convert.FromBase64String(tokenArr[1]);
+            string pay= System.Text.ASCIIEncoding.ASCII.GetString(decpay);
+            string[] name = pay.Split(',');
+            string ds = name[0];
+            string[] dsd = ds.Split(':');
+            string emri = dsd[1];
+            emri = emri.Replace("\"","");
 
-            RSAPKCS1SignatureDeformatter rsaDeformatter = new RSAPKCS1SignatureDeformatter(rsa);
-            rsaDeformatter.SetHashAlgorithm("SHA256");
-            byte[] h = Encoding.ASCII.GetBytes(tokenParts[2]);
-            if (rsaDeformatter.VerifySignature(hash, Encoding.ASCII.GetBytes(tokenParts[2])))
-                Console.WriteLine("Po");
-            else
-                Console.WriteLine("Jo");
+            string koha= name[2];
+            string[] dsdi = koha.Split(':');
+            string time = dsdi[1];
+            time = time.Replace("\"", "");
+            
+            //DateTime date = Convert.ToDateTime(time);
+           //Console.WriteLine(date);
+
+            RsaSecurityKey publicKeyii;
+            RSA rsa= RSA.Create();
+            string pubkke = "";
+            string key = "keys/"+emri+".pub.xml";
+            using (StreamReader reader = new StreamReader(key))
+            {
+                pubkke = reader.ReadToEnd();
+            }
+            rsa.FromXML(pubkke);
+            publicKeyii = new RsaSecurityKey(rsa);
+            
+            var prms = new TokenValidationParameters()
+            {
+                RequireSignedTokens = true,
+                RequireExpirationTime = true,
+                IssuerSigningKey = publicKeyii,
+                ValidateAudience = false,
+                ValidIssuer = _company
+            };
+            var handler = new JwtSecurityTokenHandler();
+
+            try
+            {
+                handler.ValidateToken(tokeni, prms, out SecurityToken token);
+                var tok=handler.ReadJwtToken(tokeni);
+                Console.WriteLine("User:"+emri);
+                Console.WriteLine("Valid:Jo");
+                Console.WriteLine("Skadimi:"+time);
+            }
+            catch 
+            {
+                Console.WriteLine("User:"+emri);
+                Console.WriteLine("Valid:Po");
+                Console.WriteLine("Skadimi:"+time);
+               // Console.WriteLine(pay);
+            }
+
         }
 
      }
