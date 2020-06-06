@@ -127,11 +127,10 @@ namespace ds
 
             string koha= name[2];
             string[] dsdi = koha.Split(':');
-            string time = dsdi[1];
-            time = time.Replace("\"", "");
+            string timee = dsdi[1];
+            timee = timee.Replace("\"", "");
             
-            //DateTime date = Convert.ToDateTime(time);
-           //Console.WriteLine(date);
+            var dataa = DateTimeOffset.FromUnixTimeMilliseconds(long.Parse(timee)*1000).UtcDateTime;
 
             RsaSecurityKey publicKeyii;
             RSA rsa= RSA.Create();
@@ -160,13 +159,13 @@ namespace ds
                 var tok=handler.ReadJwtToken(tokeni);
                 Console.WriteLine("User:"+emri);
                 Console.WriteLine("Valid:Jo");
-                Console.WriteLine("Skadimi:"+time);
+                Console.WriteLine("Skadimi:"+dataa);
             }
             catch 
             {
                 Console.WriteLine("User:"+emri);
                 Console.WriteLine("Valid:Po");
-                Console.WriteLine("Skadimi:"+time);
+                Console.WriteLine("Skadimi:"+dataa);
                // Console.WriteLine(pay);
             }
 
