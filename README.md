@@ -173,7 +173,11 @@ Eshte mundesuarne qofte se  tokeni ka skaduar, nese nuk ka nënshkrim valid, ose
 konsiderohet valid.
 
 Komanda write-message 
+
 Mënyra e qasjes së kësaj komande bëhet duke pranuar opcionin --sender <token>
 Këtu është zgjeruar e njejta komand nga fazat e mëparshme.
-Me egzekutimin e opcionit sender, ciphertexti në console ka marrur formen e zgjeruar,
+Me egzekutimin e opcionit sender, ciphertexti në console ka marrur formen e zgjeruar,dhe këtë e kemi paraqitur përmes screen shot tek folderi i shembujve të egzekutimit. 
+Vlera sender është emri i shfrytëzuesit që i korrespondon tokenit token. Komanda dështon nëse
+tokeni nuk është valid ose ka skaduar.
+Nëse validohet tokeni me sukses, atëherë nënshkrimi bëhet me çelësin privat të dërguesit sender.
 
