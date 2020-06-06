@@ -143,22 +143,24 @@ Faza e tretë është zgjerim i fazës së dytë. Mënyra e ekzekutimit është 
 
 Detajet e implementimit:
 
-Skema e ruajtjes së fjalëkalimeve: Fjalëkalimet janë ruajtur me salted hash.
+Skema e ruajtjes së fjalëkalimeve: Fjalëkalimet janë ruajtur edhe si salted edhe si hash. Gjatë logimit të user-ave bëhet krahasimi i tyre për të parë nëse user-i ekziston apo fjalëkalimi është në rregull. 
 
 Mënyra e ruajtjes së shënimeve: Të dhënat e user-it (emri dhe fjalëkalimi) janë ruajtur në një bazë të dhënash (DBMS).
 
-Struktura e tokenëve të lëshuar:
+Struktura e tokenëve të lëshuar: Tokenët e lëshuar janë të formës JWT (JSON Web Token). Koha për të cilin është valid token-i është 20 minuta.
 
+Komanda create-user
 
+Është zgjerim i metodës në fazën e dytë. Këtu gjatë krijimit të user-it kërkohet edhe një fjalëkalim i cili ruhet bashkë me emrin e tij ashtu sic e kemi cekur edhe më lart. Fjalëkalimi nuk duket gjatë shkruarjes së tij. Duke shkruar fjalëkalimin në vend të shkronjave paraqiten yje (*) dhe jo vetëm në këtë rast por në të gjitha rastet ku kërkohet fjalëkalimi.
+
+Komanda delete-user
+
+Me këtë komandë fshijmë të gjitha të dhënat e user-it në fjalë.
 
 Komanda Login:
-Kjo komand në hyrje merr te dhënat e user-it emrin dhe fjalkalimin e tij.Në rast përputhje të të dhënave dhe në rast të egzekutimit të suksesshën lëshohet një token i nënshkruar i cili përdoret për autentikim të shfrytëzuesit.
+Kjo komand në hyrje merr te dhënat e user-it emrin dhe fjalkalimin e tij.Në rast përputhje të të dhënave dhe në rast të ekzekutimit të suksesshën lëshohet një token i nënshkruar i cili përdoret për autentikim të shfrytëzuesit.
 
-Mënyra e ruajtjes së tokenit është sipas dëshirës, psh. ne mund ta lëshoni një JWT, një XML të
-nënshkruar, ose ndonjë format të vet-definuar.
 Pë nënshkrimin e tokenit është përdorur çelësi privat i shfrytëzuesit, ndërsa për vërtetim të nënshkrimit është përdorur çelësi publik i shfrytëzuesit. 
-Tokeni skadon pas 20 minutave dhe ai mund të përdoret vetëm për shfrytëzuesin për të cilin është
-lëshuar.
 
 Komanda Status:
 
@@ -169,7 +171,7 @@ User: edon
 Valid: po
 Skadimi: 21/05/2020 17:23
 
-Eshte mundesuarne qofte se  tokeni ka skaduar, nese nuk ka nënshkrim valid, ose nuk ekziston shfrytëzuesi, atëherë tokeni nuk
+Eshte mundesuar ne qofte se  tokeni ka skaduar, nese nuk ka nënshkrim valid, ose nuk ekziston shfrytëzuesi, atëherë tokeni nuk
 konsiderohet valid.
 
 Komanda write-message 
