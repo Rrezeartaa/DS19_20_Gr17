@@ -172,3 +172,8 @@ Skadimi: 21/05/2020 17:23
 Eshte mundesuarne qofte se  tokeni ka skaduar, nese nuk ka nënshkrim valid, ose nuk ekziston shfrytëzuesi, atëherë tokeni nuk
 konsiderohet valid.
 
+Komanda write-message 
+Mënyra e qasjes së kësaj komande bëhet duke pranuar opcionin --sender <token>
+Këtu është zgjeruar e njejta komand nga fazat e mëparshme.
+Me egzekutimin e opcionit sender, ciphertexti në console ka marrur formen e zgjeruar,
+
