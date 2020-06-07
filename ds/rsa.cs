@@ -470,31 +470,108 @@ namespace ds
             else
                 Console.WriteLine("Gabim: Celesi publik '" + name + "' nuk ekziston");
         }
-        public static void decrypt(string encryptedtext)
+       public static void decrypt(string encryptedtext)
         {
             byte[] decemri;
             byte[] decIV;
             byte[] decEncryptedKey;
             byte[] decEncryptedMsg;
+            byte[] decSender;
+            byte[] verify;
             String emri;
             try
             {
-             if (encryptedtext.EndsWith(".txt"))
-            {
-                 if (!File.Exists(encryptedtext))
+                if (encryptedtext.EndsWith(".txt"))
+                {
+                    if (!File.Exists(encryptedtext))
                     {
                         Console.WriteLine("Ky fajll nuk ekziston!");
                     }
-                 else{
-                using (StreamReader readeri = new StreamReader(encryptedtext))
+                    else
+                    {
+                        using (StreamReader readeri = new StreamReader(encryptedtext))
+                        {
+                            string Texti = readeri.ReadToEnd();
+                            String[] b = Texti.Split('.');
+                            decemri = System.Convert.FromBase64String(b[0]);
+                            emri = System.Text.ASCIIEncoding.ASCII.GetString(decemri);
+                            decIV = System.Convert.FromBase64String(b[1]);
+                            decEncryptedKey = System.Convert.FromBase64String(b[2]);
+                            decEncryptedMsg = System.Convert.FromBase64String(b[3]);
+
+
+
+
+                            string privateKeyFile = "keys/" + emri + ".xml";
+                            if (File.Exists(privateKeyFile))
+                            {
+                                byte[] DesKey = RSAdecrypt(decEncryptedKey, privateKeyFile, emri);
+
+                                DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+                                MemoryStream memoryStream = new MemoryStream
+                                        (Convert.FromBase64String(b[3]));
+                                CryptoStream cryptoStream = new CryptoStream(memoryStream,
+                                    cryptoProvider.CreateDecryptor(DesKey, decIV), CryptoStreamMode.Read);
+                                StreamReader reader = new StreamReader(cryptoStream);
+                                string result = reader.ReadToEnd();
+
+                                String M = result;
+
+                               
+
+                                if (b.Length > 4)
+                                {
+                                    decSender = System.Convert.FromBase64String(b[4]);
+                                    String sender = System.Text.ASCIIEncoding.ASCII.GetString(decSender);
+                                    verify = System.Convert.FromBase64String(b[5]);
+                                    RSACryptoServiceProvider objRSA = new RSACryptoServiceProvider();
+                                    string path = "keys/" + sender + ".pub.xml";
+
+                                    string strXmlParameters = "";
+                                    StreamReader sr = new StreamReader(path);
+                                    strXmlParameters = sr.ReadToEnd();
+                                    sr.Close();
+
+                                    objRSA.FromXmlString(strXmlParameters);
+
+                                    byte[] byteSignedValue = verify;
+                                    byte[] bytePlaintexti = decEncryptedMsg;
+
+                                    bool Verified = objRSA.VerifyData(bytePlaintexti, new SHA1CryptoServiceProvider(), byteSignedValue);
+                                    string v = "";
+                                    if (Verified)
+                                        v = "jovalid";
+                                    else if (!File.Exists(path))
+                                        v = " mungon celesi publik '" + sender + "'";
+                                    else
+                                        v = "valid";
+
+                                    Console.WriteLine("Marresi: " + emri);
+                                    Console.WriteLine("Mesazhi: " + M);
+                                    Console.WriteLine("Derguesi: " + sender);
+                                    Console.WriteLine("Nenshkrimi: " + v);
+
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Marresi: " + emri);
+                                    Console.WriteLine("Mesazhi: " + M);
+                                }
+                            }
+                            else
+                                Console.WriteLine("Gabim: Celesi privat " + privateKeyFile + " nuk ekziston");
+                        }
+                    }
+                }
+                else if (!encryptedtext.Contains(".txt"))
                 {
-                    string Texti = readeri.ReadToEnd();
-                    String[] b = Texti.Split('.');
-                    decemri = System.Convert.FromBase64String(b[0]);
+                    String[] a = encryptedtext.Split('.');
+                    decemri = System.Convert.FromBase64String(a[0]);
                     emri = System.Text.ASCIIEncoding.ASCII.GetString(decemri);
-                    decIV = System.Convert.FromBase64String(b[1]);
-                    decEncryptedKey = System.Convert.FromBase64String(b[2]);
-                    decEncryptedMsg = System.Convert.FromBase64String(b[3]);
+                    decIV = System.Convert.FromBase64String(a[1]);
+                    decEncryptedKey = System.Convert.FromBase64String(a[2]);
+                    decEncryptedMsg = System.Convert.FromBase64String(a[3]);
+                    
                     string privateKeyFile = "keys/" + emri + ".xml";
                     if (File.Exists(privateKeyFile))
                     {
@@ -502,7 +579,7 @@ namespace ds
 
                         DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
                         MemoryStream memoryStream = new MemoryStream
-                                (Convert.FromBase64String(b[3]));
+                                (Convert.FromBase64String(a[3]));
                         CryptoStream cryptoStream = new CryptoStream(memoryStream,
                             cryptoProvider.CreateDecryptor(DesKey, decIV), CryptoStreamMode.Read);
                         StreamReader reader = new StreamReader(cryptoStream);
@@ -510,47 +587,51 @@ namespace ds
 
                         String M = result;
 
-                        Console.WriteLine("Marresi: " + emri);
-                        Console.WriteLine("Mesazhi: " + M);
+                        if (a.Length > 4)
+                        {
+                            decSender = System.Convert.FromBase64String(a[4]);
+                            String sender = System.Text.ASCIIEncoding.ASCII.GetString(decSender);
+                            verify = System.Convert.FromBase64String(a[5]);
+                            RSACryptoServiceProvider objRSAa = new RSACryptoServiceProvider();
+                            string path = "keys/" + sender + ".pub.xml";
+
+                            string strXmlParameters = "";
+                            StreamReader sr = new StreamReader(path);
+                            strXmlParameters = sr.ReadToEnd();
+                            sr.Close();
+
+                            objRSAa.FromXmlString(strXmlParameters);
+                            byte[] byteSignedValue = System.Text.Encoding.UTF8.GetBytes(a[5]);
+                            byte[] bytePlaintexti = System.Text.Encoding.UTF8.GetBytes(a[3]);
+
+                            bool Verified = objRSAa.VerifyData(bytePlaintexti, new SHA1CryptoServiceProvider(), byteSignedValue);
+                            string v = "";
+                            if (Verified)
+                                v = "jovalid";
+                            else if (!File.Exists(path))
+                                v = " mungon celesi publik '" + sender + "'";
+                            else
+                                v = "valid";
+
+                            Console.WriteLine("Marresi: " + emri);
+                            Console.WriteLine("Mesazhi: " + M);
+                            Console.WriteLine("Derguesi: " + sender);
+                            Console.WriteLine("Nenshkrimi: " + v);
+                        }
+                        else
+                        {
+
+                            Console.WriteLine("Marresi: " + emri);
+                            Console.WriteLine("Mesazhi: " + M);
+                        }
                     }
                     else
                         Console.WriteLine("Gabim: Celesi privat " + privateKeyFile + " nuk ekziston");
                 }
-              }
             }
-            else if (!encryptedtext.Contains(".txt"))
+            catch (FormatException e)
             {
-            String[] a = encryptedtext.Split('.');
-            decemri = System.Convert.FromBase64String(a[0]);
-            emri = System.Text.ASCIIEncoding.ASCII.GetString(decemri);    
-            decIV = System.Convert.FromBase64String(a[1]);
-            decEncryptedKey = System.Convert.FromBase64String(a[2]);
-            decEncryptedMsg = System.Convert.FromBase64String(a[3]);
-            string privateKeyFile = "keys/" + emri + ".xml";
-              if (File.Exists(privateKeyFile))
-            {
-
-                byte[] DesKey = RSAdecrypt(decEncryptedKey, privateKeyFile, emri);
-
-                DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
-                MemoryStream memoryStream = new MemoryStream
-                        (Convert.FromBase64String(a[3]));
-                CryptoStream cryptoStream = new CryptoStream(memoryStream,
-                    cryptoProvider.CreateDecryptor(DesKey, decIV), CryptoStreamMode.Read);
-                StreamReader reader = new StreamReader(cryptoStream);
-                string result = reader.ReadToEnd();
-
-                String M = result;
-
-                Console.WriteLine("Marresi: " + emri);
-                Console.WriteLine("Mesazhi: " + M);
-            }
-              else
-                Console.WriteLine("Gabim: Celesi privat " + privateKeyFile + " nuk ekziston");
-              }
-            }
-            catch (FormatException e) {
-                Console.WriteLine("Mesazhi qe doni te dekriptoni nuk eshte ne formatin e duhur!"); 
+                Console.WriteLine("Mesazhi qe doni te dekriptoni nuk eshte ne formatin e duhur!");
             }
         }
         public static byte[] RSAdecrypt(byte[] DESKey, string privatei, string emri)
