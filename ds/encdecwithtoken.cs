@@ -51,8 +51,7 @@ namespace ds
                 writer.Flush();
                 encryptedText = Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
 
-                string[] tokenArr = token.Split('.');
-                //string pay = tokenArr[1];
+                string[] tokenArr = token.Split('.'); 
                 byte[] decpay = System.Convert.FromBase64String(tokenArr[1]);
                 string pay = System.Text.ASCIIEncoding.ASCII.GetString(decpay);
                 string[] sender = pay.Split(',');
@@ -99,8 +98,8 @@ namespace ds
         public static void encrypttok(string name, string message, string file, string token)
        {
             string publicKeyFile = "keys/" + name + ".pub.xml";
-            if (File.Exists(publicKeyFile))
-          {
+         if (File.Exists(publicKeyFile))
+        {
                var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(name);
                var test = System.Convert.ToBase64String(plainTextBytes);
                  
