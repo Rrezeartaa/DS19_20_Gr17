@@ -147,7 +147,7 @@ Skema e ruajtjes së fjalëkalimeve: Fjalëkalimet janë ruajtur edhe si salted 
 
 Mënyra e ruajtjes së shënimeve: Të dhënat e user-it (emri dhe fjalëkalimi) janë ruajtur në një bazë të dhënash (DBMS).
 
-Struktura e tokenëve të lëshuar: Tokenët e lëshuar janë të formës JWT (JSON Web Token). Koha për të cilin është valid token-i është 20 minuta.
+Struktura e tokenëve të lëshuar: Tokenët e lëshuar janë të formës JWT (JSON Web Token). Në payload të token janë vendosur emri i shfrytëzuesit dhe data e skadimit përkatësisht afati kohor për të cilin është i vlefshëm tokeni. Koha për të cilin është valid tokeni është 20 minuta. 
 
 Komanda create-user
 
@@ -158,29 +158,24 @@ Komanda delete-user
 Me këtë komandë fshijmë të gjitha të dhënat e user-it në fjalë.
 
 Komanda Login:
-Kjo komand në hyrje merr te dhënat e user-it emrin dhe fjalkalimin e tij.Në rast përputhje të të dhënave dhe në rast të ekzekutimit të suksesshën lëshohet një token i nënshkruar i cili përdoret për autentikim të shfrytëzuesit.
+Kjo komandë në hyrje merr të dhënat e user-it emrin dhe fjalëkalimin e tij. Në rast përputhje të të dhënave dhe në rast të ekzekutimit të suksesshëm lëshohet një token i nënshkruar i cili përdoret për autentikim të shfrytëzuesit.
 
 Pë nënshkrimin e tokenit është përdorur çelësi privat i shfrytëzuesit, ndërsa për vërtetim të nënshkrimit është përdorur çelësi publik i shfrytëzuesit. 
-https://www.c-sharpcorner.com/blogs/jwt-based-tokenisation-via-net-core
+
+
 Komanda Status:
 
-Sintaksa per kete komande eshte :ds status 'token'
+Sintaksa për këtë komandë është :ds status 'token'
 
-$ ds status dG9rZW5pIGkgbmVuc2hrcnVhci4u...
-User: edon
-Valid: po
-Skadimi: 21/05/2020 17:23
-https://www.c-sharpcorner.com/blogs/jwt-based-tokenisation-via-net-core
-
-
-Eshte mundesuar ne qofte se  tokeni ka skaduar, nese nuk ka nënshkrim valid, ose nuk ekziston shfrytëzuesi, atëherë tokeni nuk
+Është mundësuar në qoftë se tokeni ka skaduar, nëse nuk ka nënshkrim valid, ose nuk ekziston shfrytëzuesi, atëherë tokeni nuk
 konsiderohet valid.
+Formati i datës së skadimit në programin tonë është: MM/DD/YYYY H:M:s AM/PM.
 
 Komanda write-message 
 
 Mënyra e qasjes së kësaj komande bëhet duke pranuar opcionin --sender <token>
 Këtu është zgjeruar e njejta komand nga fazat e mëparshme.
-Me egzekutimin e opcionit sender, ciphertexti në console ka marrur formen e zgjeruar,dhe këtë e kemi paraqitur përmes screen shot tek folderi i shembujve të egzekutimit. 
+Me ekzekutimin e opcionit sender, ciphertexti në console merr formen e zgjeruar,dhe këtë e kemi paraqitur përmes screenshot tek folderi i shembujve të ekzekutimit. 
 Vlera sender është emri i shfrytëzuesit që i korrespondon tokenit token. Komanda dështon nëse
 tokeni nuk është valid ose ka skaduar.
 Nëse validohet tokeni me sukses, atëherë nënshkrimi bëhet me çelësin privat të dërguesit sender.
@@ -189,6 +184,17 @@ Komanda read-message
  
 Komanda read-message zgjerohet ashtu që nëse figuron pjesa e dërguesit/nënshkrimit në mesazh,
 atëherë do të tentohet verifikimi i atij nënshkrimi duke përdorur çelësin publik të dërguesit.
-Nëse mungon pjesa e dërguesit/nënshkrimit, atëherë komanda e injoron dhe vepron sikur në fazën e dyte.
-Ekziston mundësia që marrësi nuk e ka çelësin publik të dërguesit dhe pamja per kete mund te shihet te folderi i shembujve te ekzekutimit.
+Nëse mungon pjesa e dërguesit/nënshkrimit, atëherë komanda e injoron dhe vepron sikur në fazën e dytë.
+Ekziston mundësia që marrësi nuk e ka çelësin publik të dërguesit.
 
+
+Burimet në të cilat jemi mbështetur:
+
+https://jwt.io/
+
+https://www.c-sharpcorner.com/blogs/jwt-based-tokenisation-via-net-core
+
+
+Si dhe në ushtrimet e realizuara në këtë lëndë.
+
+Mënyrën se si ekzekutohen më saktësisht këto komanda mund ta shihni në folderin ShembujEkzekutimi/Faza3.
