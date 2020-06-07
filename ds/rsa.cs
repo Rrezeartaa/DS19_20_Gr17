@@ -58,6 +58,11 @@ namespace ds
                 }
             } while (true);
             Console.WriteLine();
+            if (!ree.IsMatch(password))
+            {
+                Console.WriteLine("Gabim: Fjalekalimi duhet te permbaje se paku nje numer ose simbol dhe t'i permbaje se paku tete shkronja.");             
+            }
+            else{
             Console.WriteLine("Perserit fjalekalimin:");
             string confpassword = "";
             do
@@ -91,12 +96,8 @@ namespace ds
                 {
                      if (password != confpassword)
                     {
-                        Console.WriteLine("Fjalekalimet nuk perputhen!");
-                    }
-                    else if(!ree.IsMatch(password))
-                    {
-                        Console.WriteLine("Gabim: Fjalekalimi duhet te permbaje se paku nje numer ose simbol dhe t'i permbaje tete shkronja.");
-                    }
+                        Console.WriteLine("Gabim: Fjalekalimet nuk perputhen!");
+                    }                    
                     else
                     {
                     string publicKey = rsa.ToXmlString(false);
@@ -138,7 +139,8 @@ namespace ds
                 }
                 else
                     Console.WriteLine("Gabim: Celesi '" + name + "' ekziston paraprakisht.");
-            }      
+            }    
+          }
         }
         
          public static void DeleteKey(string name)
