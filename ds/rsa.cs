@@ -147,21 +147,17 @@ namespace ds
             string privateKeyFile = "keys/" + name + ".xml";
             using (var rsa = new RSACryptoServiceProvider((int)KeySizes.SIZE_2048))
             {
-                if (File.Exists(publicKeyFile) && File.Exists(privateKeyFile))
-                {
-                     File.Delete(privateKeyFile);
-                     File.Delete(publicKeyFile);
-                    string ConnectionString = @"Data Source=RREZEARTA-DESKT\SQLEXPRESS;Initial Catalog=celesat;Integrated Security=True;Pooling=False";
-                    SqlConnection objConn = new SqlConnection(ConnectionString);
-                    string command = "Delete from celesi where emri='"+name+"'";
-                    SqlCommand objCommand = new SqlCommand(command, objConn);
-                    try
-                    {
-                        objConn.Open();
-                        int AffectedRows = objCommand.ExecuteNonQuery();
-                        if (AffectedRows == 1)
+                 string ConnectionString = @"Data Source=RREZEARTA-DESKT\SQLEXPRESS;Initial Catalog=celesat;Integrated Security=True;Pooling=False";
+                  SqlConnection objConn = new SqlConnection(ConnectionString);
+                  string command = "Delete from celesi where emri='"+name+"'";
+                  SqlCommand objCommand = new SqlCommand(command, objConn);
+                  try
+                  {
+                     objConn.Open();
+                     int AffectedRows = objCommand.ExecuteNonQuery();
+                      if (AffectedRows == 1)
                             Console.WriteLine("Eshte larguar shfrytezuesi '" + name + "'");
-                        else
+                      else
                             Console.WriteLine("Nuk eshte larguar shfrytezuesi '" + name + "'");
 
                     }
@@ -171,6 +167,11 @@ namespace ds
                         objConn.Close();
 
                     }
+                if (File.Exists(publicKeyFile) && File.Exists(privateKeyFile))
+                {
+                     File.Delete(privateKeyFile);
+                     File.Delete(publicKeyFile);
+                   
                     Console.WriteLine("Eshte larguar celesi privat '" + privateKeyFile + "'");
                     Console.WriteLine("Eshte larguar celesi publik '" + publicKeyFile + "'");
                 }
@@ -499,9 +500,6 @@ namespace ds
                             decEncryptedKey = System.Convert.FromBase64String(b[2]);
                             decEncryptedMsg = System.Convert.FromBase64String(b[3]);
 
-
-
-
                             string privateKeyFile = "keys/" + emri + ".xml";
                             if (File.Exists(privateKeyFile))
                             {
@@ -516,8 +514,6 @@ namespace ds
                                 string result = reader.ReadToEnd();
 
                                 String M = result;
-
-                               
 
                                 if (b.Length > 4)
                                 {
