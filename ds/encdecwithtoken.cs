@@ -165,5 +165,28 @@ namespace ds
         objRSA.FromXmlString(strXmlParametersi);
         byte[] byteSignedText = objRSA.SignData(Encoding.UTF8.GetBytes(sign), new SHA1CryptoServiceProvider());
         string signed = Convert.ToBase64String(byteSignedText);
+        string result = "\n" + test + "." + IV + "." + rsakey + "." + encryptedText + "." + testi + "." + signed;
+        if (!file.Contains(".txt"))
+        {
+            Console.WriteLine("Mesazhi i enkriptuar mund te ruhet vetem ne tekst file!");
+        }
+        else
+        {
+            File.WriteAllText(file, result);
+            if (startdate < DateTime.Now)
+            {
+                Console.WriteLine("Tokeni nuk eshte valid");
+            }
+            else
+            {
+
+                Console.WriteLine("Mesazhi i enkriptuar u ruajt ne fajllin '" + file + "'.");
+            }
+        }
+    }
+    else
+        Console.WriteLine("Gabim: Celesi publik '" + name + "' nuk ekziston");
+}
+
     }
 }
