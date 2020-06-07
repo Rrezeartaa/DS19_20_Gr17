@@ -103,5 +103,15 @@ namespace ds
           {
                var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(name);
                var test = System.Convert.ToBase64String(plainTextBytes);
+                 
+        DES DESalg = DES.Create();
+        byte[] keyb = new byte[8];
+        byte[] ivb = new byte[8];
+        keyb = DESalg.Key;
+
+        ivb = DESalg.IV;
+
+        string KEY = Convert.ToBase64String(keyb);
+        string IV = Convert.ToBase64String(ivb);
     }
 }
