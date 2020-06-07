@@ -125,5 +125,18 @@ namespace ds
         cryptoProvider.CreateEncryptor(keybytes, ivb), CryptoStreamMode.Write);
         StreamWriter writer = new StreamWriter(cryptoStream);
         writer.Write(message);
+                  writer.Flush();
+        cryptoStream.FlushFinalBlock();
+        writer.Flush();
+        encryptedText = Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
+        string[] tokenArr = token.Split('.');
+
+        byte[] decpay = System.Convert.FromBase64String(tokenArr[1]);
+        string pay = System.Text.ASCIIEncoding.ASCII.GetString(decpay);
+        string[] sender = pay.Split(',');
+        string ds = sender[0];
+        string[] dsd = ds.Split(':');
+        string emrii = dsd[1];
+        emrii = emrii.Replace("\"", "");
     }
 }
