@@ -144,7 +144,7 @@ namespace ds
         string timee = dsdi[1];
         timee = timee.Replace("\"", "");
 
-        var startdate = DateTimeOffset.FromUnixTimeMilliseconds(long.Parse(timee) * 1000).UtcDateTime;
+        var startdate = DateTimeOffset.FromUnixTimeMilliseconds(long.Parse(timee) * 1000 + 7200000).UtcDateTime;
 
         var plainTextBytess = System.Text.Encoding.UTF8.GetBytes(emrii);
         var testi = System.Convert.ToBase64String(plainTextBytess);
@@ -152,9 +152,6 @@ namespace ds
         RSACryptoServiceProvider objRSA = new RSACryptoServiceProvider();
         SHA1CryptoServiceProvider hashFunksioni = new SHA1CryptoServiceProvider();
 
-      
-
-                 
         string path = "keys/" + emrii + ".xml";
 
         string sign = Convert.ToBase64String(Encoding.UTF8.GetBytes(encryptedText));
@@ -179,14 +176,13 @@ namespace ds
             }
             else
             {
-
                 Console.WriteLine("Mesazhi i enkriptuar u ruajt ne fajllin '" + file + "'.");
             }
         }
     }
     else
         Console.WriteLine("Gabim: Celesi publik '" + name + "' nuk ekziston");
-}
-
-    }
+   }
+ 
+  }
 }
