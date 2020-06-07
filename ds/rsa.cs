@@ -95,7 +95,7 @@ namespace ds
                     }
                     else if(!ree.IsMatch(password))
                     {
-                        Console.WriteLine("Gabim: Fjalekalimi duhet te permbaje se paku nje numer ose simbol.");
+                        Console.WriteLine("Gabim: Fjalekalimi duhet te permbaje se paku nje numer ose simbol dhe t'i permbaje tete shkronja.");
                     }
                     else
                     {
