@@ -12,7 +12,7 @@ namespace ds
         private const int ERROR_BAD_ARGUMENTS = 0xA0;
         public static void Main(string[] args)
         {
-            if (args.Length < 2|| args.Length > 5)
+            if (args.Length < 2|| args.Length > 7)
             {
                 throw new IndexOutOfRangeException("\n\tFunksionet e ketij programi pranojne 2 deri ne 5 argumente!");
             }            
@@ -187,34 +187,45 @@ namespace ds
                     Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");                
             }
             else if ("write-message".Equals(args[0]))
-            {                
-                  if (args.Length == 3)
-                    {
-                        rsa.encrypt(args[1], args[2]);
-                    }
-                    else if(args.Length==4)
-                        rsa.encrypt(args[1], args[2], args[3]);
+            {
+                if (args.Length == 3)
+                {
+                    rsa.encrypt(args[1], args[2]);
+                }
+                else if (args.Length == 4)
+                    rsa.encrypt(args[1], args[2], args[3]);
                 else if (args[3].Equals("--sender"))
                 {
-                    encdecwithtoken.encryptii(args[1], args[2], args[4]);
+                    encdecwithtoken.encryptii(args[1], args[2], args[4]);              
+                }
+                else if (args[4].Equals("--sender"))
+                {
+                    encdecwithtoken.encrypttok(args[1], args[2], args[3], args[5]);
                 }
                 else
                     Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
-                
+
             }
             else if ("read-message".Equals(args[0]))
             {
-                if(args.Length==2)
-                    rsa.decrypt(args[1]);               
+                if (args.Length == 2)
+                    rsa.decrypt(args[1]);
                 else
-                    Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");             
+                    Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
             }
             else if ("login".Equals(args[0]))
             {
-                loginstatus.loginGenerateToken(args[1]);
+                if (args.Length == 2)
+                    loginstatus.loginGenerateToken(args[1]);
+                else
+                    Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
             }
-            else if ("status".Equals(args[0])){
-                loginstatus.statusToken(args[1]);
+            else if ("status".Equals(args[0]))
+            {
+                if (args.Length == 2)
+                    loginstatus.statusToken(args[1]);
+                else
+                    Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
             }
             else
             {
