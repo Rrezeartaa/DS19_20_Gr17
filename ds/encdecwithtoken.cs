@@ -138,5 +138,15 @@ namespace ds
         string[] dsd = ds.Split(':');
         string emrii = dsd[1];
         emrii = emrii.Replace("\"", "");
+                 
+        string koha = sender[2];
+        string[] dsdi = koha.Split(':');
+        string timee = dsdi[1];
+        timee = timee.Replace("\"", "");
+
+        var startdate = DateTimeOffset.FromUnixTimeMilliseconds(long.Parse(timee) * 1000).UtcDateTime;
+
+        var plainTextBytess = System.Text.Encoding.UTF8.GetBytes(emrii);
+        var testi = System.Convert.ToBase64String(plainTextBytess);
     }
 }
