@@ -161,7 +161,7 @@ Komanda Login:
 Kjo komand në hyrje merr te dhënat e user-it emrin dhe fjalkalimin e tij.Në rast përputhje të të dhënave dhe në rast të ekzekutimit të suksesshën lëshohet një token i nënshkruar i cili përdoret për autentikim të shfrytëzuesit.
 
 Pë nënshkrimin e tokenit është përdorur çelësi privat i shfrytëzuesit, ndërsa për vërtetim të nënshkrimit është përdorur çelësi publik i shfrytëzuesit. 
-
+https://www.c-sharpcorner.com/blogs/jwt-based-tokenisation-via-net-core
 Komanda Status:
 
 Sintaksa per kete komande eshte :ds status 'token'
@@ -170,6 +170,7 @@ $ ds status dG9rZW5pIGkgbmVuc2hrcnVhci4u...
 User: edon
 Valid: po
 Skadimi: 21/05/2020 17:23
+
 
 Eshte mundesuar ne qofte se  tokeni ka skaduar, nese nuk ka nënshkrim valid, ose nuk ekziston shfrytëzuesi, atëherë tokeni nuk
 konsiderohet valid.
