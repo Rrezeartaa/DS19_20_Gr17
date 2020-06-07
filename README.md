@@ -187,4 +187,6 @@ Komanda read-message
  
 Komanda read-message zgjerohet ashtu që nëse figuron pjesa e dërguesit/nënshkrimit në mesazh,
 atëherë do të tentohet verifikimi i atij nënshkrimi duke përdorur çelësin publik të dërguesit.
+Nëse mungon pjesa e dërguesit/nënshkrimit, atëherë komanda e injoron dhe vepron sikur në fazën e dyte.
+Ekziston mundësia që marrësi nuk e ka çelësin publik të dërguesit dhe pamja per kete mund te shihet te folderi i shembujve te ekzekutimit.
 
