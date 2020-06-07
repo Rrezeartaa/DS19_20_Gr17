@@ -194,6 +194,10 @@ namespace ds
                     }
                     else if(args.Length==4)
                         rsa.encrypt(args[1], args[2], args[3]);
+                else if (args[3].Equals("--sender"))
+                {
+                    encdecwithtoken.encryptii(args[1], args[2], args[4]);
+                }
                 else
                     Console.WriteLine("Nuk i keni dhene argumentet ne rregull!");
                 
@@ -222,7 +226,9 @@ namespace ds
                         "delete-user\n"+
                         "export-key\n"+
                         "write-message\n"+
-                        "read-message\n\n");
+                        "read-message\n"+
+                        "login\n"+
+                        "status\n\n");
                 Environment.ExitCode = ERROR_BAD_ARGUMENTS;
             }
         }
