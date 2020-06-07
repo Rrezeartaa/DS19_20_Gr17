@@ -66,7 +66,7 @@ namespace ds
                 string timee = dsdi[1];
                 timee = timee.Replace("\"", "");
 
-                var startdate = DateTimeOffset.FromUnixTimeMilliseconds(long.Parse(timee) * 1000).UtcDateTime;
+                var startdate = DateTimeOffset.FromUnixTimeMilliseconds(long.Parse(timee) * 1000+7200000).UtcDateTime;
 
                 var plainTextBytess = System.Text.Encoding.UTF8.GetBytes(emrii);
                 var testi = System.Convert.ToBase64String(plainTextBytess);
@@ -97,9 +97,9 @@ namespace ds
                 Console.WriteLine("Gabim: Celesi publik '" + name + "' nuk ekziston");
         }
         public static void encrypttok(string name, string message, string file, string token)
-         {
+       {
             string publicKeyFile = "keys/" + name + ".pub.xml";
-             if (File.Exists(publicKeyFile))
+            if (File.Exists(publicKeyFile))
           {
                var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(name);
                var test = System.Convert.ToBase64String(plainTextBytes);
@@ -113,7 +113,7 @@ namespace ds
 
         string KEY = Convert.ToBase64String(keyb);
         string IV = Convert.ToBase64String(ivb);
-                  RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
+        RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
         var pubkey = File.ReadAllText(publicKeyFile);
         rsa.FromXmlString(pubkey);
         byte[] keybytes = Convert.FromBase64String(KEY);
@@ -125,7 +125,7 @@ namespace ds
         cryptoProvider.CreateEncryptor(keybytes, ivb), CryptoStreamMode.Write);
         StreamWriter writer = new StreamWriter(cryptoStream);
         writer.Write(message);
-                  writer.Flush();
+         writer.Flush();
         cryptoStream.FlushFinalBlock();
         writer.Flush();
         encryptedText = Convert.ToBase64String(memoryStream.GetBuffer(), 0, (int)memoryStream.Length);
@@ -168,14 +168,14 @@ namespace ds
             Console.WriteLine("Mesazhi i enkriptuar mund te ruhet vetem ne tekst file!");
         }
         else
-        {
-            File.WriteAllText(file, result);
+        {          
             if (startdate < DateTime.Now)
             {
                 Console.WriteLine("Tokeni nuk eshte valid");
             }
             else
-            {
+            { 
+                File.WriteAllText(file, result);
                 Console.WriteLine("Mesazhi i enkriptuar u ruajt ne fajllin '" + file + "'.");
             }
         }
