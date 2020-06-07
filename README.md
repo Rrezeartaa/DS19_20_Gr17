@@ -170,6 +170,7 @@ $ ds status dG9rZW5pIGkgbmVuc2hrcnVhci4u...
 User: edon
 Valid: po
 Skadimi: 21/05/2020 17:23
+https://www.c-sharpcorner.com/blogs/jwt-based-tokenisation-via-net-core
 
 
 Eshte mundesuar ne qofte se  tokeni ka skaduar, nese nuk ka nënshkrim valid, ose nuk ekziston shfrytëzuesi, atëherë tokeni nuk
