@@ -182,4 +182,9 @@ Me egzekutimin e opcionit sender, ciphertexti në console ka marrur formen e zgj
 Vlera sender është emri i shfrytëzuesit që i korrespondon tokenit token. Komanda dështon nëse
 tokeni nuk është valid ose ka skaduar.
 Nëse validohet tokeni me sukses, atëherë nënshkrimi bëhet me çelësin privat të dërguesit sender.
+ 
+Komanda read-message
+ 
+Komanda read-message zgjerohet ashtu që nëse figuron pjesa e dërguesit/nënshkrimit në mesazh,
+atëherë do të tentohet verifikimi i atij nënshkrimi duke përdorur çelësin publik të dërguesit.
 
