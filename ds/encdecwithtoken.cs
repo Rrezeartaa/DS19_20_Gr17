@@ -149,6 +149,12 @@ namespace ds
         var plainTextBytess = System.Text.Encoding.UTF8.GetBytes(emrii);
         var testi = System.Convert.ToBase64String(plainTextBytess);
                  
+        RSACryptoServiceProvider objRSA = new RSACryptoServiceProvider();
+        SHA1CryptoServiceProvider hashFunksioni = new SHA1CryptoServiceProvider();
+
+      
+
+                 
         string path = "keys/" + emrii + ".xml";
 
         string sign = Convert.ToBase64String(Encoding.UTF8.GetBytes(encryptedText));
