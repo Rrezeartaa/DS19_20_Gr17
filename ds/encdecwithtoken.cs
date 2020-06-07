@@ -113,5 +113,17 @@ namespace ds
 
         string KEY = Convert.ToBase64String(keyb);
         string IV = Convert.ToBase64String(ivb);
+                  RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(2048);
+        var pubkey = File.ReadAllText(publicKeyFile);
+        rsa.FromXmlString(pubkey);
+        byte[] keybytes = Convert.FromBase64String(KEY);
+        string rsakey = Convert.ToBase64String(rsa.Encrypt(keybytes, true));
+        string encryptedText = string.Empty;
+        DESCryptoServiceProvider cryptoProvider = new DESCryptoServiceProvider();
+        MemoryStream memoryStream = new MemoryStream();
+        CryptoStream cryptoStream = new CryptoStream(memoryStream,
+        cryptoProvider.CreateEncryptor(keybytes, ivb), CryptoStreamMode.Write);
+        StreamWriter writer = new StreamWriter(cryptoStream);
+        writer.Write(message);
     }
 }
