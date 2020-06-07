@@ -96,5 +96,12 @@ namespace ds
             else
                 Console.WriteLine("Gabim: Celesi publik '" + name + "' nuk ekziston");
         }
+        public static void encrypttok(string name, string message, string file, string token)
+         {
+            string publicKeyFile = "keys/" + name + ".pub.xml";
+             if (File.Exists(publicKeyFile))
+          {
+               var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(name);
+               var test = System.Convert.ToBase64String(plainTextBytes);
     }
 }
