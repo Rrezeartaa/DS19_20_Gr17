@@ -161,21 +161,22 @@ namespace ds
                 RequireExpirationTime = true,
                 IssuerSigningKey = publicKeyii,
                 ValidateAudience = false,
-                ValidIssuer = _company
+                ValidIssuer = emri
             };
             var handler = new JwtSecurityTokenHandler();
 
             try
-            {   handler.ValidateToken(tokeni, prms, out SecurityToken token);
-                var tok=handler.ReadJwtToken(tokeni);
+            {
+                handler.ValidateToken(tokeni, prms, out SecurityToken token);
+                var tok = handler.ReadJwtToken(tokeni);
                 Console.WriteLine("User:" + emri);
-                Console.WriteLine("Valid:Jo");
-                Console.WriteLine("Skadimi:");
+                Console.WriteLine("Valid:Po");
+                Console.WriteLine("Skadimi:"+startdate);
             }
             catch
             {
                 Console.WriteLine("User:" + emri);
-                Console.WriteLine("Valid:Po");
+                Console.WriteLine("Valid:Jo");
                 Console.WriteLine("Skadimi:" + startdate);
             }
 
